@@ -1,0 +1,105 @@
+\chapter{*Differenciálegyenletek alapjai}
+
+\section{Követelmények}
+\begin{enumerate}
+    \item Differenciálegyenlet (rendszer) fogalma
+    \item Kezdetiérték-probléma (Cauchy-feladat)
+    \item Egzakt egyenlet
+    \item Szeparábilis egyenlet
+    \item Rakéta emelkedési idejének kiszámítása
+\end{enumerate}
+
+\section{Rakéta (vagy függőleges hajítás) feladat}
+
+Az előadáshoz hűen, kezdjük a differenciálegyenletek témakörét egy példafeladattal. A könyvhöz és segédanyaghoz hűen, vezessük is le a megoldását.
+
+\subsection{Feladat}
+
+Függőlegesen fellövünk egy $m$ tömegű rakétát $v_0$ kezdősebességgel. Tegyük fel, hogy a mozgására két erő hat: a nehézségi (jelölje $\alpha$ a nehézségi gyorsulást), valamint a sebesség négyzetével arányos súrlódási erő (jelölje $\beta$ az arányossági tényezőt).
+
+\emph{Mennyi ideig emelkedik a rakéta?}\footnote{Elengedhetetlen megjegyezni, hogy a feladatot rakéta helyett lehet általános függőleges hajításként is felírni: egy $m$ tömegű testet felhajítunk tökéletesen függőlegesen $v_0$ kezdősebességgel. A fenti feltevések ugyanúgy érvényesülnek itt is. Egyes vizsgáztatóknál (értsd: Kovács tanár úr) ez a preferált felvázolása a feladatnak.}
+
+\subsection{Newton II. törvénye (dinamika alaptörvénye)}
+
+Newton II. törvénye\footnote{\href{https://hu.wikipedia.org/wiki/Newton_törvényei\#Newton_II._törvénye_–_a_dinamika_alaptörvénye}{Wikipédia: Newton II. törvénye}} alapján tudjuk, hogy egy test gyorsulása egyenesen arányos a rá ható erővel, és fordítottan arányos a test tömegével, azaz
+$$ a = \frac F m$$
+
+Vagy ugyanez a $p = m \cdot v$ impulzusból kifejezve:
+\begin{equation}\label{eq:newton-ii}
+F = \frac {dp} {dt} \enspace \Big( = p'(t)\Big)
+\end{equation}
+
+\subsection{Megoldás}
+
+A fenti paraméterekről az értelmezésükből következően tudjuk, hogy $m > 0, v_0 > 0, \alpha > 0$ és $\beta > 0$. Ismert továbbá a $v(0) = v_0$ \emph{kezdeti feltétel}.
+
+Jelölje $v \in \R \to \R$ a sebesség-idő függvény, amiről feltételezzük, hogy $v \in D$ és $0 \in \dom_v$.
+
+A feladat szerint egy $t \in \dom_v$ időpillanatban $\alpha \cdot m + \beta \cdot v^2(t)$ erő fog hatni a testre, aminek iránya ellentétes az emelkedésre. Ekkor mivel $m$ nem függ az időtől, a \ref{eq:newton-ii} egyenlőség alapján:
+\begin{equation}\label{eq:rocket-diff-cond}
+    m \cdot v'(t) = -\alpha \cdot m - \beta \cdot v^2(t) \qquad (t \in \dom_v)
+\end{equation}
+
+Olyan $v$ függvényt keresünk tehát, amire a \ref{eq:rocket-diff-cond} egyenlőség teljesül. Speciálisan, keressük azt a $T \in \dom_v$ időpillanatot, amire $v(T) = 0$ teljesül (ez lesz az a pont, ahol a rakéta befejezi az emelkedést, majd zuhanásba kezd). Átrendezve a \ref{eq:rocket-diff-cond} kikötést $v'(t)$-re, majd a jobb oldalból $-\alpha$-t kiemelve kapjuk, hogy
+\begin{equation}\label{eq:rocket-diff-cond-2}
+    v'(t) = -\alpha \left(1 + \frac \beta {m\alpha} v^2(t)\right) \qquad (v \in \dom_v)
+\end{equation}
+
+\emph{Ötlet:} Fejezzük ki a \ref{eq:rocket-diff-cond-2} egyenlőség jobb oldalát az $(\arctg)'(t) = \dfrac 1 {1 + t^2} \enspace (t \in \R)$ függvénnyel.
+
+Legyen tehát $\varphi(t) := \arctg(ct) \enspace (t \in \R)$, valamilyen $c > 0$ állandóval. Ekkor az összetett fv. deriváltja tétel alapján:
+$$\varphi'(t) = c \cdot \frac 1 {1+(ct)^2} \quad (t \in \R)$$
+
+{ % group for beta-alpha-m shortcuts
+\newcommand{\sbma}{\sqrt{\dfrac \beta {m \alpha}}}
+\newcommand{\bma}{\dfrac \beta {m \alpha}}
+\newcommand{\bam}{\dfrac {\beta \alpha} m}
+
+Speciálisan $c := \sbma$ választással,
+$$\varphi'(t) = \sbma \cdot \frac 1 {1 + \bma \cdot t^2} \quad (t \in \R)$$
+
+Vegyük ekkor a következő $F$ függvényt,
+\begin{gather*}
+F(t) := \varphi(v(t)) = \arctg\left(\sbma \cdot v(t)\right) \quad (t \in \dom_v) \implies \\[7pt]
+F'(t) = \varphi'(v(t)) \cdot v'(t) = \sbma \cdot \frac{1}{1 + \bma \cdot v^2(t)} \cdot v'(t) \quad (t \in \dom_v)
+\end{gather*}
+
+Behelyettesítve \ref{eq:rocket-diff-cond-2}-t $F'(t)$-be, bármely $t \in \dom_v$-re
+\begin{align*}
+    F'(t) &= \sbma \cdot \frac{1}{1 + \bma \cdot v^2(t)} \cdot -\alpha\left(1+\bma v^2(t)\right) \\
+          &= \sbma \cdot -\alpha \\
+          &= -\sqrt{\bam}
+\end{align*}
+
+Legyen továbbá $G(t) := -\sqrt{\bam}\cdot t \quad (t \in \dom_v)$, ekkor nyilván $G'(t) = -\sqrt{\bam} \quad (t \in \dom-v)$.
+
+Ekkor $\forall t \in \dom_v : F'(t) = G'(t)$, vagyis $(F-G)'(t) = 0 \quad (t \in \dom_v)$.
+
+Mivel $\dom_v$ nyílt\footnote{
+Vagyis az egész $\dom_v$ értelmezési tartományon értelmezhetőek így az $F',\, G'$ deriváltfüggvények.
+}, így $F-G$ értéke mindenhol konstans lesz, azaz $F - G \equiv \kappa$ (kappa).
+
+Ez alapján $F$ definíciójába visszahelyettesítve:
+\begin{equation}\label{eq:rocket-phi-v-t}
+    \varphi(v(t)) = F(t) = G + \kappa = -\sqrt{\bam}\cdot t + \kappa \quad (t \in \dom_v)
+\end{equation}
+
+Továbbá a $v(0) = v_0$ kezdeti feltétel és $\varphi(t) = \arctg\left(\sbma \cdot t\right)$ definíció szerint:
+$$\kappa = \varphi(v(0)) = \varphi(v_0) = \arctg\left(\sbma \cdot v_0\right)$$
+
+Most, hogy kifejeztük $\kappa$-t a feladat paraméterei szerint, megadhatjuk $\varphi(v(t))$-t is \ref{eq:rocket-phi-v-t} alapján hasonlóan:
+$$\varphi(v(t)) = \arctg\left(\sqrt{\bma} \cdot v(t)\right) = -\sqrt{\bam}\cdot t + \kappa = -\sqrt{\bam}\cdot t + \arctg\left(\sqrt{\bma} \cdot v_0\right)$$
+
+Ekkor a paraméterekből és $t$-ből ki tudjuk fejezni az $\arctg$ függvényen keresztül $v(t)$ értékét. Speciálisan keressük $T \in \dom_v$-t, amiről tudjuk, hogy $v(T) = 0$.
+\begin{align*}
+    \varphi(0) &= \varphi(v(T)) \\
+    \underbrace{\arctg(0)}_{=\,0} &= -\sqrt{\bam} \cdot T + \arctg\left(\sqrt{\bma}\cdot v_0\right) \\
+    \sqrt{\bam}\cdot T &= \arctg\left(\sqrt{\bma}\cdot v_0\right) \\
+    T &= \sqrt{\frac{m}{\beta \alpha}} \cdot \arctg\left(\sqrt{\bma} \cdot v_0\right)
+\end{align*}
+
+Tehát a rakéta a $\displaystyle T = \sqrt{\frac{m}{\beta \alpha}} \cdot \arctg\left(\sqrt{\bma} \cdot v_0\right)$ időpillanatban fejezi be az emelkedést, azaz pontosan ennyi ideig fog emelkedni.
+
+% TODO: ábrák
+
+}

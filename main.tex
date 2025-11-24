@@ -1,0 +1,101 @@
+\documentclass[12pt, a4paper]{report}
+
+\usepackage[margin=0.75in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[magyar]{babel}
+\usepackage{titlesec}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{etoolbox}
+\usepackage{needspace}
+\usepackage{url}
+\usepackage{hyperref}
+\usepackage{hyphenat}
+\usepackage{enumitem}
+\usepackage{perpage}
+\usepackage{comment}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepgfplotslibrary{groupplots}
+\usepgfplotslibrary{colormaps}
+\usetikzlibrary{external}
+\tikzexternalize
+
+\graphicspath{{images/}}
+
+\usepackage{math_macros}
+
+\hypersetup{
+    pdfauthor=Szűcs Gergely,
+    pdftitle=Analízis alkalmazásai jegyzet,
+    hidelinks,
+    linktoc=all
+}
+
+\MakePerPage{footnote}
+
+\newcommand{\defaultparindent}{\setlength\parindent{0pt}}
+\defaultparindent
+
+\begin{comment}
+\renewcommand{\figurename}{ábra}
+\DeclareCaptionLabelFormat{fig-custom}{#2.\ #1}
+\captionsetup[figure]{labelformat=fig-custom, labelsep=colon}
+\end{comment}
+
+\renewcommand{\contentsname}{Tartalomjegyzék}
+
+\newcommand{\chaptertoc}[1]{ %
+    \chapter*{#1} %
+    \addcontentsline{toc}{chapter}{#1}}
+\newcommand{\phead}[1]{\paragraph{#1}\mbox{}}
+
+\pretocmd{\subsubsection}{\needspace{3\baselineskip}}{}{}
+\pretocmd{\subsection}{\needspace{4\baselineskip}}{}{}
+\pretocmd{\section}{\needspace{5\baselineskip}}{}{}
+
+\title{Analízis alkalmazásai jegyzet}
+\author{Szűcs Gergely}
+\date{Utoljára frissítve: \today}
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+
+\begingroup
+\titleformat{\chapter}[display]{\normalfont\huge\bfseries}{\thechapter. tétel}{1em}{}{}
+
+\include{topics/tetel1}
+\include{topics/tetel2}
+\include{topics/tetel3}
+% \include{topics/tetel4}
+% \include{topics/tetel5}
+% \include{topics/tetel6}
+% \include{topics/tetel7}
+% \include{topics/tetel8}
+% \include{topics/tetel9}
+% \include{topics/tetel10}
+% \include{topics/tetel11}
+% \include{topics/tetel12}
+% \include{topics/tetel13}
+% \include{topics/tetel14}
+% \include{topics/tetel15}
+% \include{topics/tetel16}
+% \include{topics/tetel17}
+\endgroup
+
+\appendix
+
+\chapter{``Triviális'' levezetések gyűjteménye}
+\input{appendix/cond}
+\include{appendix/loc-inv}
+
+\end{document}
