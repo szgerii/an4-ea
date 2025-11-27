@@ -1,23 +1,25 @@
 \chapter{*Differenciálegyenletek alapjai}
 
+\setcounter{footnote}{0}
+
 \section{Követelmények}
 \begin{enumerate}
-    \item Differenciálegyenlet (rendszer) fogalma
-    \item Kezdetiérték-probléma (Cauchy-feladat)
+    \item Differenciálegyenlet (rendszer) fogalma, kezdetiérték-probléma (Cauchy-feladat)
     \item Egzakt egyenlet
     \item Szeparábilis egyenlet
     \item Rakéta emelkedési idejének kiszámítása
 \end{enumerate}
 
-\section{Rakéta (vagy függőleges hajítás) feladat}
+\section{Rakéta (vagy függőleges hajítás) feladat}\label{sec:rocket-general}
 
-Az előadáshoz hűen, kezdjük a differenciálegyenletek témakörét egy példafeladattal. A könyvhöz és segédanyaghoz hűen, vezessük is le a megoldását.
+Az előadáshoz hűen, kezdjük a differenciálegyenletek témakörét egy példafeladattal. A könyvhöz és segédanyaghoz hűen, vezessük is le a megoldását az általános feladat bevezetése, vagy a szeparábilis differenciálegyenletek megismerése előtt. A tétel végén szerepel egy szeparábilis d.e.-ként történő, jelentősen rövidebb megoldás is, vizsgán természetesen ezt érdemes felírni.
+% TODO: link
 
 \subsection{Feladat}
 
 Függőlegesen fellövünk egy $m$ tömegű rakétát $v_0$ kezdősebességgel. Tegyük fel, hogy a mozgására két erő hat: a nehézségi (jelölje $\alpha$ a nehézségi gyorsulást), valamint a sebesség négyzetével arányos súrlódási erő (jelölje $\beta$ az arányossági tényezőt).
 
-\emph{Mennyi ideig emelkedik a rakéta?}\footnote{Elengedhetetlen megjegyezni, hogy a feladatot rakéta helyett lehet általános függőleges hajításként is felírni: egy $m$ tömegű testet felhajítunk tökéletesen függőlegesen $v_0$ kezdősebességgel. A fenti feltevések ugyanúgy érvényesülnek itt is. Egyes vizsgáztatóknál (értsd: Kovács tanár úr) ez a preferált felvázolása a feladatnak.}
+\emph{Mennyi ideig emelkedik a rakéta?}\footnote{Fontos megjegyezni, hogy a feladatot rakéta helyett lehet általános függőleges hajításként is felírni: egy $m$ tömegű testet felhajítunk tökéletesen függőlegesen $v_0$ kezdősebességgel. A fenti feltevések ugyanúgy érvényesülnek itt is. Egyes vizsgáztatóknál (értsd: Kovács tanár úr) ez a preferált felvázolása a feladatnak.}
 
 \subsection{Newton II. törvénye (dinamika alaptörvénye)}
 
@@ -26,26 +28,26 @@ $$ a = \frac F m$$
 
 Vagy ugyanez a $p = m \cdot v$ impulzusból kifejezve:
 \begin{equation}\label{eq:newton-ii}
-F = \frac {dp} {dt} \enspace \Big( = p'(t)\Big)
+F = \frac {dp} {dt} =\text{(ha $m$ nem függ $t$-től)} = m\cdot \frac {dv}{dt}\ \big(\equiv m\cdot v'(t)\big)
 \end{equation}
 
 \subsection{Megoldás}
 
 A fenti paraméterekről az értelmezésükből következően tudjuk, hogy $m > 0, v_0 > 0, \alpha > 0$ és $\beta > 0$. Ismert továbbá a $v(0) = v_0$ \emph{kezdeti feltétel}.
 
-Jelölje $v \in \R \to \R$ a sebesség-idő függvény, amiről feltételezzük, hogy $v \in D$ és $0 \in \dom_v$.
+Jelölje $v \in \R \to \R$ a sebesség-idő függvényt, amiről feltételezzük, hogy $v \in D$ és $0 \in \dom_v$.
 
-A feladat szerint egy $t \in \dom_v$ időpillanatban $\alpha \cdot m + \beta \cdot v^2(t)$ erő fog hatni a testre, aminek iránya ellentétes az emelkedésre. Ekkor mivel $m$ nem függ az időtől, a \ref{eq:newton-ii} egyenlőség alapján:
+A feladat szerint bármely $t \in \dom_v$ időpillanatban $\alpha \cdot m + \beta \cdot v^2(t)$ erő fog hatni a testre, aminek iránya ellentétes az emelkedésre. Ekkor mivel $m$ nem függ az időtől, a \eqref{eq:newton-ii} egyenlőség alapján:
 \begin{equation}\label{eq:rocket-diff-cond}
     m \cdot v'(t) = -\alpha \cdot m - \beta \cdot v^2(t) \qquad (t \in \dom_v)
 \end{equation}
 
-Olyan $v$ függvényt keresünk tehát, amire a \ref{eq:rocket-diff-cond} egyenlőség teljesül. Speciálisan, keressük azt a $T \in \dom_v$ időpillanatot, amire $v(T) = 0$ teljesül (ez lesz az a pont, ahol a rakéta befejezi az emelkedést, majd zuhanásba kezd). Átrendezve a \ref{eq:rocket-diff-cond} kikötést $v'(t)$-re, majd a jobb oldalból $-\alpha$-t kiemelve kapjuk, hogy
+Olyan $v$ függvényt keresünk tehát, amire a \eqref{eq:rocket-diff-cond} egyenlőség teljesül. Speciálisan, keressük azt a $T \in \dom_v$ időpillanatot, amire $v(T) = 0$ teljesül (ez lesz az a pont, ahol a rakéta befejezi az emelkedést, majd zuhanásba kezd). Átrendezve a \eqref{eq:rocket-diff-cond} kikötést $v'(t)$-re, majd a jobb oldalból $-\alpha$-t kiemelve kapjuk, hogy
 \begin{equation}\label{eq:rocket-diff-cond-2}
     v'(t) = -\alpha \left(1 + \frac \beta {m\alpha} v^2(t)\right) \qquad (v \in \dom_v)
 \end{equation}
 
-\emph{Ötlet:} Fejezzük ki a \ref{eq:rocket-diff-cond-2} egyenlőség jobb oldalát az $(\arctg)'(t) = \dfrac 1 {1 + t^2} \enspace (t \in \R)$ függvénnyel.
+\emph{Ötlet:} Próbáljunk meg konstruálni olyan függvényt, aminek a deriváltjában olyan osztó lesz, ami kiejti a \eqref{eq:rocket-diff-cond-2} egyenlőség jobb oldalán található zárójeles részt (azaz próbáljuk meg feloldani a $v^2$-en függést). Vegyük észre, hogy az $(\arctg)'(t) = \dfrac 1 {1 + t^2} \enspace (t \in \R)$ függvény valamilyen konstans szorzóval $t$-re egy jó kiindulópontnak tűnik.
 
 Legyen tehát $\varphi(t) := \arctg(ct) \enspace (t \in \R)$, valamilyen $c > 0$ állandóval. Ekkor az összetett fv. deriváltja tétel alapján:
 $$\varphi'(t) = c \cdot \frac 1 {1+(ct)^2} \quad (t \in \R)$$
@@ -64,11 +66,10 @@ F(t) := \varphi(v(t)) = \arctg\left(\sbma \cdot v(t)\right) \quad (t \in \dom_v)
 F'(t) = \varphi'(v(t)) \cdot v'(t) = \sbma \cdot \frac{1}{1 + \bma \cdot v^2(t)} \cdot v'(t) \quad (t \in \dom_v)
 \end{gather*}
 
-Behelyettesítve \ref{eq:rocket-diff-cond-2}-t $F'(t)$-be, bármely $t \in \dom_v$-re
+Behelyettesítve \eqref{eq:rocket-diff-cond-2}-t $F'(t)$-be, bármely $t \in \dom_v$-re
 \begin{align*}
     F'(t) &= \sbma \cdot \frac{1}{1 + \bma \cdot v^2(t)} \cdot -\alpha\left(1+\bma v^2(t)\right) \\
-          &= \sbma \cdot -\alpha \\
-          &= -\sqrt{\bam}
+          &= \sbma \cdot -\alpha = -\sqrt{\bam}
 \end{align*}
 
 Legyen továbbá $G(t) := -\sqrt{\bam}\cdot t \quad (t \in \dom_v)$, ekkor nyilván $G'(t) = -\sqrt{\bam} \quad (t \in \dom-v)$.
@@ -87,14 +88,14 @@ Ez alapján $F$ definíciójába visszahelyettesítve:
 Továbbá a $v(0) = v_0$ kezdeti feltétel és $\varphi(t) = \arctg\left(\sbma \cdot t\right)$ definíció szerint:
 $$\kappa = \varphi(v(0)) = \varphi(v_0) = \arctg\left(\sbma \cdot v_0\right)$$
 
-Most, hogy kifejeztük $\kappa$-t a feladat paraméterei szerint, megadhatjuk $\varphi(v(t))$-t is \ref{eq:rocket-phi-v-t} alapján hasonlóan:
+Most, hogy kifejeztük $\kappa$-t a feladat paraméterei szerint, megadhatjuk $\varphi(v(t))$-t is \eqref{eq:rocket-phi-v-t} alapján hasonlóan:
 $$\varphi(v(t)) = \arctg\left(\sqrt{\bma} \cdot v(t)\right) = -\sqrt{\bam}\cdot t + \kappa = -\sqrt{\bam}\cdot t + \arctg\left(\sqrt{\bma} \cdot v_0\right)$$
 
 Ekkor a paraméterekből és $t$-ből ki tudjuk fejezni az $\arctg$ függvényen keresztül $v(t)$ értékét. Speciálisan keressük $T \in \dom_v$-t, amiről tudjuk, hogy $v(T) = 0$.
 \begin{align*}
     \varphi(0) &= \varphi(v(T)) \\
     \underbrace{\arctg(0)}_{=\,0} &= -\sqrt{\bam} \cdot T + \arctg\left(\sqrt{\bma}\cdot v_0\right) \\
-    \sqrt{\bam}\cdot T &= \arctg\left(\sqrt{\bma}\cdot v_0\right) \\
+    \sqrt{\bam}\cdot T &= \arctg\left(\sqrt{\bma}\cdot v_0\right) \\[3pt]
     T &= \sqrt{\frac{m}{\beta \alpha}} \cdot \arctg\left(\sqrt{\bma} \cdot v_0\right)
 \end{align*}
 
@@ -103,3 +104,263 @@ Tehát a rakéta a $\displaystyle T = \sqrt{\frac{m}{\beta \alpha}} \cdot \arctg
 % TODO: ábrák
 
 }
+
+\section{Differenciálegyenletek alapfogalmai}
+
+\subsection{Differenciálegyenlet}
+
+\begin{samepage}
+Legyen $1 \le n \in \N$ és $I \subset \R$ és $\Omega \subset \R^n$ egy nyílt intervallumok.\footnote{
+Itt mondhatnánk, hogy $\Omega$ szempontjából elég azokkal az esetekkel foglalkozni, ahol egy kicsit szigorúbb feltételt teljesít: $\Omega$ egy $\R^n$-beli tartomány. Azonban azt megadni, hogy ez mit is jelent, új topológiai fogalmakat használna, ezért ezt a segédanyag is mellőzi. Ha lesz rá időm, készítek neki egy bekezdést a függelékben. % TODO
+} Tfh. az $f : I \times \Omega \to \R^n$ függvényre $f \in C$ teljesül.
+Ekkor a következő feladatot szeretnénk megoldani:
+
+Határozzunk meg olyan $\varphi \in I \to \Omega$ függvényt, amire
+\begin{enumerate}[label=(\alph*),itemsep=1pt,topsep=1pt]
+    \item $\dom_\varphi$ nyílt intervallum
+    \item $\varphi \in D$
+    \item $\varphi'(x) = f(x,\,\varphi(x)) \quad (x \in \dom_\varphi)$
+\end{enumerate}
+
+Ezt a feladatot hívjuk \textbf{explicit elsőrendű közönséges differenciálegyenletnek} (röviden \textbf{differenciálegyenletnek}), és bevezetjük rá a \emph{d.e.} rövidítést.
+\end{samepage}
+
+\begin{remarks}
+\
+\begin{enumerate}[label=\roman*),itemsep=1pt]
+    \item Minden, a fenti feltételeket kielégítő $\varphi$ függvény a d.e. \textbf{megoldása}.
+    \item Az $f$ függvény pedig a d.e. \textbf{jobb oldala}.
+    \item Ha $\varphi$ egy megoldás, minden $J \subset \dom_\varphi$ nyílt intervallumon vett $\restrict \varphi J$ leszűkítés is megoldás.
+    \item Az $\R \times \R^n \equiv \R^{n+1}$ azonosítás miatt az $f$ mint egy $\R^{n+1} \to \R^n$ leképezés, azaz $n+1$ változós vektorfüggvényként is felfogható, mivel $I \times \Omega \subset \R^{n+1}$.
+    \item Az elnevezésben a \emph{közönséges} azt jelenti, hogy egyváltozós függvényt keresünk (nincsenek parciális deriváltak), az \emph{elsőrendű} azt, hogy nincsen elsőnél magasabb rendű deriváltra feltételünk, az \emph{explicit} pedig azt, hogy a deriváltra nézve van kifejezve a feltétel.
+    \item Az \emph{implicit} alaknál $f$ helyett veszünk pl. egy $F : I \times \Omega \times \R^n \to \R^n,\ F \in C$ függvényt és $F(x,\,\varphi(x),\,\varphi'(x))=0$ formában adjuk meg a feltételt.
+\end{enumerate}
+
+\end{remarks}
+
+\subsection{Kezdetiérték-probléma}
+
+Ha adott $\tau \in I,\ \xi \in \Omega$ mellett kikötjük még $\tau \in \dom_\varphi$ és $\varphi(\tau) = \xi$ feltételeket is, akkor \textbf{kezdetiérték-problémának} hívjuk a feladatot (vagy \textbf{Cauchy-feladatnak}), és \emph{k.é.p.}-nek rövidítjük.
+
+\subsection{Differenciálegyenlet rendszerek}
+
+Legyen $n \ge 2$.
+
+Ekkor $\varphi = (\varphi_1, \ldots, \varphi_n)$ és $f = (f_1, \ldots, f_n)$.
+$$\varphi'(x) = f(x, \varphi(x)) \eqv \varphi_i'(x) = f_i(x, f_1(x), f_2(x), \ldots, f_n(x)) \quad (x \in \dom_\varphi)$$
+
+Ilyenkor \textbf{differenciálegyenlet rendszerről} beszélünk, \emph{d.e.r.}-nek rövidítjük.
+
+Tehát a differenciálegyenlet rendszerek a differenciálegyenlet feladat $n \ge 2$ esetei.
+
+\subsection{Teljes megoldás}
+
+\subsubsection{Felvezető példa}
+
+Legyen $n := 1,\ I := \Omega := \R$. Vizsgáljuk ekkor az $f(x,y) := \sqrt{|y|} \quad \big((x,y) \in \R\big)$ jobb oldallal rendelkező $\tau := \xi := 0$ k.é.p.-et.
+
+Olyan nyílt $\dom_\varphi$ intervallumon értelmezett $\varphi \in \R \to \R$ függvényt keresünk tehát, amire $\varphi \in D$ teljesül, $\varphi(0) = 0$, és
+$$\varphi'(x) = f(x,\varphi(x)) = \sqrt{|\varphi(x)|} \quad \big((x,y) \in \dom_\varphi\big)$$
+
+Ekkor $\varphi \equiv 0$ egy megoldása a differenciálegyenletnek.
+
+De ugyanakkor a következő, lényegesen különböző $\tilde\varphi$ függvény is:
+$$\tilde\varphi(x) := \begin{cases}
+    \dfrac {x^2} 4 & (x \ge 0) \\[8pt]
+    -\dfrac {x^2} 4 & (x < 0)
+\end{cases}$$
+
+Tehát a fenti k.é.p. nem oldható meg egyértelműen.
+
+\subsubsection{Kezdetiérték-probléma egyértelműsége, teljes megoldás}
+
+Egy k.é.p. \emph{egyértelműen oldható meg}, ha tetszőleges $\varphi, \tilde\varphi$ megoldásokra
+\begin{equation}\label{eq:kep-uni-sol-eqv}
+\varphi(x) = \tilde\varphi(x) \qquad (x \in \dom_\varphi \cap \dom_{\tilde\varphi}).
+\end{equation}
+
+Legyen ekkor $\mathcal M$ a k.é.p. megoldásainak halmaza és
+\vspace{-3pt}
+$$J := \bigcup_{\varphi \in \mathcal M}\dom_\varphi$$
+
+Ekkor $J\ (\subset I)$ nyílt\footnote{Ld. \emph{Analízis III., nyílt halmazok uniója}.}, valamint a $\tau \in \dom_\varphi$ k.é.p. feltétel és \eqref{eq:kep-uni-sol-eqv} miatt $\tau \in J$ is teljesül.
+
+Legyen $\Phi : J \to \R : \Phi(x) := \varphi(x) \enspace (x \in J, \varphi \in \mathcal M)$. Ez tetszőleges $\varphi$-vel megadható \eqref{eq:kep-uni-sol-eqv} miatt.
+
+Ekkor szintén \eqref{eq:kep-uni-sol-eqv} és a k.é.p. feltételei szerint $\Phi(\tau) = \xi,\ \Phi \in D,$ és $\Phi'(x) = f(x,\Phi(x)) \enspace (x \in J)$.
+
+Vagyis $\Phi \in \mathcal M$ és minden $\varphi \in \mathcal M$-re $\varphi(x) = \Phi(x) \enspace (x \in \dom_\varphi) \eqv \varphi = \restrict \Phi {\dom_\varphi}$.
+
+Tehát a k.é.p. bármely megoldása megadható $\Phi$ egy leszűkítéseként.
+
+Ekkor a $\Phi$ függvényt a kezdetiérték-probléma \textbf{teljes megoldásának} nevezzük.
+
+\section{Szeparábilis differenciálegyenletek}
+
+\subsection{Definíció}
+
+Legyen $n := 1$ és $I,J \subset \R$ nyílt intervallumok. Legyen továbbá $g : I \to \R,\ h : J \to R \setminus \{0\}$, amikre $g, h \in C$.
+
+Tekintsük ekkor a $f(x,y) := g(x) \cdot h(x) \quad \big((x,y) \in I  \times J\big)$ jobb oldallal rendelkező differenciálegyenletet. Ekkor olyan $\varphi \in I \to J$ megoldást keresünk, amire
+\begin{equation}\label{eq:sep-de-def}
+\varphi'(x) = g(x) \cdot h(\varphi(x)) \qquad (x \in \dom_\varphi)
+\end{equation}
+
+Az ilyen alakban megadható differenciálegyenlet feladatot hívjuk \textbf{szeparábilis differenciálegyenletnek} (vagy \textbf{szétválasztható változójú differenciálegyenletnek}).
+
+Legyenek adottak $\tau \in I,\ \xi \in J$ számok, amikre $\tau \in \dom_\varphi$ és $\varphi(\tau) = \xi$.
+
+Ekkor egy \emph{szeparábilis differenciálegyenletre vonatkozó kezdetiérték-problémával} van dolgunk.
+
+\subsection{Szeparábilis d.e.-re vonatkozó k.é.p.-ek megoldhatósága}\label{sec:sep-uni}
+
+Tetszőleges szeparábilis differenciálegyenletre vonatkozó kezdetiérték-probléma \emph{egyértelműen} megoldható, és van olyan $\psi$ megoldása, amire minden $\varphi$ megoldással
+\vspace{-4pt}
+$$\varphi(x) = \psi(x) \qquad (\dom_\varphi \cap \dom_\psi)$$
+\vspace{-30pt}
+\begin{proof}
+\
+
+A definícióban szereplő szimbólumokat értelmezzük itt is ugyanúgy.
+
+Mivel bármely $x \in J$-re $h(x) \ne 0$, egy $\varphi$ megoldással a \eqref{eq:sep-de-def} egyenlőség átrendezhető $g$-re, vagyis
+\begin{equation}\label{eq:sep-uni-proof-start}
+\frac {\varphi'(x)} {h(\varphi(x))} = g(x) \quad (x \in \dom_\varphi)
+\end{equation}
+
+ahol $\dom_\varphi \subset I$ nyílt intervallum.
+
+Mivel $g$ és $\dfrac 1 h$ nyílt intervallumon értelmezett ($\dom_g = I$ és $\dom_{1/h}=J$), folytonos függvények, így megadható egy primitív függvényük, tehát
+$$\exists G : I \to \R,\ H : J \to \R \text{ amikre } G,H \in D \text{ és } G' = g, H' = \frac 1 h$$
+
+Az összetett függvények deriváltja ($(H \circ \varphi)'(x) = H'(\varphi(x)) \cdot \varphi'(x)$) alapján \eqref{eq:sep-uni-proof-start} azt jelenti, hogy
+$$(H \circ \varphi)'(x) = \frac {\varphi'(x)}{h(\varphi(x))} = g(x) = G'(x) \quad (x \in \dom_{\varphi})$$
+
+Vagyis valamilyen $c \in \R$-vel,
+$$(H \circ \varphi - G)'(x) = 0 \implies (H \circ \varphi - G)(x) = c \qquad (x \in \dom_\varphi)$$
+
+Ekkor spec. $x := \tau$ esetben $H(\varphi(\tau)) - G(\tau) = H(\xi) - G(\tau) = c$.
+Tehát,
+\begin{equation}\label{eq:sep-uni-proof-hg-cond}
+H(\varphi(x)) - G(x) = H(\xi) - G(\tau) \qquad (x \in \dom_\varphi)
+\end{equation}
+
+Vagyis \emph{ha léteznek} megoldások, akkor a fenti egyenlőség teljesül rájuk. Lássuk be, hogy valóban mindig lesz megoldása a feladatnak.
+
+\paragraph*{Létezés.}
+
+Definiáljuk az $F : I \times J \to \R,\ F(x,y) := H(y) - G(x) - H(\xi) + G(\tau)$ függvényt. Erre $F \in C^1$ és $F(\tau, \xi) = 0$ teljesülnek. Továbbá
+$$\partial_2F(\tau, \xi) = H'(\xi) = \dfrac 1 {h(\xi)} \ne 0$$
+
+Tehát $F$-re alkalmazható az \emph{implicitfüggvény-tétel} a $(\tau, \xi)$ pontban.
+
+A tétel alapján $\exists K(\tau),\,K(\xi),\, \varphi : K(\tau) \to K(\xi)$ implicitfüggvény, amire $\varphi \in C^1$ és
+$$\varphi'(x) = -\frac{\partial_1 F(x,\,\varphi(x))}{\partial_2 F(x,\,\varphi(x))} = -\frac {-G'(x)} {H'(\varphi(x))} = g(x) \cdot h(\varphi(x)) \qquad (x \in K(\tau))$$
+
+teljesülnek. Továbbá szintén a tétel miatt $\varphi(\tau) = \xi$.
+
+Ekkor tehát $\varphi$ egy megoldás.\partqed
+
+\vspace{-2pt}
+\paragraph*{Egyértelműség.}
+
+Emlékezzünk, hogy tetszőleges $\tilde\varphi$ megoldásnak teljesíteni kell a \eqref{eq:sep-uni-proof-hg-cond} feltételt, valamilyen $G = g'$ és $H' = \dfrac 1 h$ primitív függvényekre.
+
+\emph{Ötlet:} Mivel a \eqref{eq:sep-uni-proof-hg-cond} feltételnek mindenképpen teljesülnie kell, lássuk be, hogy az összes primitív függvény $\varphi$-hez fog vezetni.
+
+Tegyük fel, hogy $\tilde H, \tilde G$ is megfelelő primitív függvények és $\tilde \varphi : \tilde K(\tau) \to \tilde K(\xi)$ egy megoldás, amire
+$$\tilde H(\tilde \varphi(x)) - \tilde G(x) = \tilde H(\xi) - \tilde G(\tau) \qquad (x \in \dom_{\tilde\varphi})$$
+
+Viszont $\exists \alpha, \beta \in \R : \tilde H = H + \alpha,\ \tilde G = G + \beta$.\footnote{
+Ld. \emph{Analízis II., Primitív függvények (alap)tulajdonságai}
+}
+Tehát bármely $x \in \dom_{\tilde\varphi}$-re,
+\begin{align}
+H(\tilde\varphi(x)) + \alpha - G(x) - \beta &= H(\xi) + \alpha - G(\tau) - \beta \label{eq:sep-uni-wincon} \\
+H(\tilde\varphi(x)) - G(x) &= H(\xi) - G(\tau) \notag
+\end{align}
+
+Tudjuk, hogy $H'(y) = \dfrac 1 {h(y)} \ne 0 \enspace (y \in J)$. Továbbá, mivel $H'$ egy deriváltfüggvény, így Darboux-tulajdonságú is.\footnote{
+Ld. \emph{Analízis II., Darboux-tétel}
+} Sőt, mivel nem veszi fel a $0$ értéket sehol, tudjuk, hogy állandó előjelű.\footnote{
+Ui. a Darboux-tulajdonság (informálisan) azt garantálja, hogy a függvény bármely két értéke között felveszi az összes köztes értéket. Emiatt, ha előjelet váltana valahol $H'$, akkor fel kéne vennie ehhez a $0$-t is valahol.
+} Ez alapján viszont $H$ szigorúan monoton\footnote{Ld. \emph{Analízis II., Monotonitás és derivált kapcsolata}}, és így invertálható is. Ekkor viszont \eqref{eq:sep-uni-proof-hg-cond} és \eqref{eq:sep-uni-wincon} egyenlőségek alapján:
+\begin{alignat*}{4}
+    & \varphi(x) && = H^{-1}(G(x) + H(\xi) - G(\tau)) \qquad && (x \in \dom_\varphi) \\
+    & \tilde\varphi(x) && = H^{-1}(G(x) + H(\xi) - G(\tau)) \qquad && (x \in \dom_{\tilde\varphi}) \\
+\implies & \varphi(x) && = \tilde\varphi(x) \qquad && (x \in \dom_\varphi \cap \dom_{\tilde\varphi})
+\end{alignat*}
+
+Tehát bármely $\tilde\varphi$ megoldás azonos lesz $\varphi$-vel $\dom_{\varphi} \cap \dom_{\tilde\varphi}$ leszűkítésen.
+\end{proof}
+
+\subsection{Rakéta feladat szeparábilis differenciálegyenletként}
+
+A felvezetésként látott megoldás a rakéta emelkedési idejének kiszámítására jelentősen rövidíthető ezekkel az ismeretekkel.
+
+Emlékeztető a feladat modelljére:
+\begin{equation}
+    v'(t) = -\alpha \left(1 + \frac \beta {m\alpha} v^2(t)\right) \qquad (v \in \dom_v) \tag{\ref{eq:rocket-diff-cond-2}}
+\end{equation}
+
+Továbbá $v(0) = v_0$.
+
+Ekkor alkalmazva a következő felbontást,
+$$I := J := \R,\ g(x) := -\alpha,\ h(y) := 1 + \frac {\beta y^2}{m\alpha} \quad (x,y \in \R)$$
+egy szeparábilis differenciálegyenletet kapunk. Továbbá $\tau := 0,\ \xi := v_0$. Ekkor:
+$$G(x) := -\alpha x,\; H(y) := \sqrt{\frac{m\alpha}{\beta}}\cdot \left(\arctg\sqrt{\frac \beta {m\alpha}} \cdot y\right) \qquad (x,y \in \R)$$
+
+Legyen továbbá $U$ az a nyílt intervallum, amin
+\begin{equation}\label{eq:rocket-sep-U}
+\left|\sqrt{\frac{\beta}{m\alpha}}x\right| < \frac \pi 2
+\end{equation}
+teljesül.
+
+Ekkor az előző bizonyítás során megfogalmazottak alapján, bármely $x \in U$-ra,
+\begin{align}
+H(v(x)) - G(x) &= H(v_0) - G(0) \notag \\
+H(v(x)) &= G(x) + H(v_0) - G(0) \notag \\
+\sqrt{\frac{m\alpha} \beta}\arctg\left(\sqrt{\frac \beta {m\alpha}} v(x)\right) &= -\alpha x + \sqrt{\frac{m\alpha} \beta}\arctg\left(\sqrt{\frac \beta {m\alpha}} v_0\right) \label{eq:rocket-sep-mid} \\
+\sqrt{\frac{m} {\beta\alpha}}\arctg\left(\sqrt{\frac \beta {m\alpha}} v(x)\right) &= \sqrt{\frac{m} {\beta\alpha}}\arctg\left(\sqrt{\frac \beta {m\alpha}} v_0\right) - x \notag \\
+\arctg\left(\sqrt{\frac \beta {m\alpha}} v(x)\right) &= \arctg\left(\sqrt{\frac \beta {m\alpha}} v_0\right) - \sqrt{\frac {\beta\alpha} m} x \notag \\
+\sqrt{\frac \beta {m\alpha}}v(x) &= \tg\left(\arctg\left(\sqrt{\frac \beta {m\alpha}} v_0\right) - \sqrt{\frac {\beta\alpha} {m}} x\right) \notag \\
+v(x) &= \sqrt{\frac {m\alpha} \beta} \tg\left(\arctg\left(\sqrt{\frac \beta {m\alpha}} v_0\right) - \sqrt{\frac {\beta\alpha} {m}} x\right) \notag
+\end{align}
+
+Megoldásnak tehát keressük azt a $T \in \dom_v$-t, amire $v(T) = 0$. 
+
+Felhasználva, hogy \eqref{eq:rocket-sep-U} miatt $\tg(x) = 0 \eqv x = 0 \enspace (x \in U)$, meg tudunk oldani $T$-re, ugyanis
+\begin{align*}
+v(T) = 0 &= \underbrace{\sqrt{\frac{m\alpha}{\beta}}}_{\ne\ 0} \tg \left(\arctg\left(\sqrt{\frac \beta {m\alpha}} v_0\right) - \sqrt{\frac {\beta\alpha} {m}}T\right) \\
+0 &= \tg \left(\arctg\left(\sqrt{\frac \beta {m\alpha}} v_0\right) - \sqrt{\frac {\beta\alpha} {m}}T\right) \\
+0 &= \arctg\left(\sqrt{\frac \beta {m\alpha}} v_0\right) - \sqrt{\frac {\beta\alpha} {m}}T \\
+\sqrt{\frac {\beta\alpha} {m}}T &= \arctg\left(\sqrt{\frac {\beta} {m\alpha}}v_0\right) \\
+T &= \sqrt{\frac{m} {\beta\alpha}} \arctg\left(\sqrt{\frac{\beta}{m\alpha}}v_0\right)
+\end{align*}
+
+Megjegyezzük, hogy a \ref{sec:sep-uni} tétel miatt $T$ valóban megegyezik a \ref{sec:rocket-general} szekcióban, kicsit más úton kapott megoldásunkkal.
+
+Megjegyezzük azt is, hogy itt a pontos $v(x)$ függvény meghatározása nélkül is ki lehetett volna számolni a $T$ értékét (pl. \eqref{eq:rocket-sep-mid}-ben $v(x)$ helyett rögtön $0$-val, és $x$ helyett $T$-vel számolva), de így a teljes általános szeparábilis d.e. megoldási módszer bemutatásra került.
+
+\section{Egzakt differenciálegyenletek}
+
+\subsection{Definíció}
+
+Legyenek $I, J \subset \R$ nyílt intervallumok és $g : I \times J \to \R,\ h : I \times J \to \R$-re olyan függvények, amire $f,g \in C$, valamint $0 \notin \rng_h$. Olyan $\varphi : I \to J,\, \varphi \in D$ megoldást keresünk, amire $\dom_\varphi \subset I$ nyílt, és
+$$\varphi'(x) = -\frac{g(x,\varphi(x))}{h(x,\varphi(x))} \qquad (x \in \dom_\varphi)$$
+
+Egy így megfogalmazott feladat \textbf{egzakt differenciálegyenlet} akkor, \emph{ha}
+$$I \times J \ni (x,y) \mapsto \big(g(x,y),\ h(x,y)\big) \in \R^2$$
+leképezésnek van primitív függvénye.
+
+Ez azt jelenti, hogy egy alkalmas $G : I \times J \to \R$ függvénnyel,
+$$\grad G = (\partial_1\, G,\ \partial_2\, G) = (g,h)$$
+
+Ha $\varphi$ függvénytől még azt is elvárjuk, hogy valamilyen $\tau \in I,\ \xi \in J$ értékekre $\tau \in \dom_\varphi$ és $\varphi(\tau) = \xi$, akkor nem meglepő módon a feladatot egy \emph{egzakt differenciálegyenletre vonatkozó kezdetiérték-problémának} nevezzük.
+
+\subsection{Egzakt d.e.-re vonatkozó k.é.p.-ek megoldhatósága}
+
+Minden egzakt differenciálegyenletre vonatkozó kezdetiérték-probléma megoldható, és van olyan $\psi$ megoldása, amire minden $\varphi$ megoldással
+$$\varphi(x) = \psi(x) \qquad (x \in \dom_\varphi \cap \dom_\psi)$$
+
+Bizonyítás a tételhez megtalálható a függelékben (ld. \ref{sec:egz-uni-proof} szekció).

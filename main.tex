@@ -49,18 +49,20 @@
 \captionsetup[figure]{labelformat=fig-custom, labelsep=colon}
 \end{comment}
 
-\renewcommand{\contentsname}{Tartalomjegyzék}
-
-\newcommand{\chaptertoc}[1]{ %
-    \chapter*{#1} %
-    \addcontentsline{toc}{chapter}{#1}}
-\newcommand{\phead}[1]{\paragraph{#1}\mbox{}}
-
 \pretocmd{\subsubsection}{\needspace{3\baselineskip}}{}{}
 \pretocmd{\subsection}{\needspace{4\baselineskip}}{}{}
 \pretocmd{\section}{\needspace{5\baselineskip}}{}{}
 
-\title{Analízis alkalmazásai jegyzet}
+\theoremstyle{remark} 
+\newtheorem*{remark}{Megjegyzés}
+\newtheorem*{remarks}{Megjegyzések}
+
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Tétel}
+\newtheorem*{theorem*}{Tétel}
+
+\title{Analízis alkalmazásai jegyzet\\(work in progress)}
 \author{Szűcs Gergely}
 \date{Utoljára frissítve: \today}
 
@@ -68,6 +70,8 @@
 
 \maketitle
 
+\renewcommand{\contentsname}{Tartalomjegyzék}
+\setcounter{tocdepth}{1}
 \tableofcontents
 
 \begingroup
@@ -76,7 +80,7 @@
 \include{topics/tetel1}
 \include{topics/tetel2}
 \include{topics/tetel3}
-% \include{topics/tetel4}
+\include{topics/tetel4}
 % \include{topics/tetel5}
 % \include{topics/tetel6}
 % \include{topics/tetel7}
@@ -97,5 +101,17 @@
 \chapter{``Triviális'' levezetések gyűjteménye}
 \input{appendix/cond}
 \include{appendix/loc-inv}
+
+\chapter{Csemege-bizonyítások tárháza}
+\label{appendix:b}
+
+\setcounter{footnote}{0}
+
+A \ref{appendix:b} függelékben olyan bizonyítások kerülnek kifejtésre, amelyek alapvetően nem képezik a vizsgakövetelmények részét, azonban hasznosak vagy érdekesek lehetnek tanulás szempontjából. Találhatók olyan tételek, amiknek bár a bizonyítása nem kell számonkérésen, a tételkimondás igen (ezeknél a kimondások megtalálhatóak a jegyzet törzsében is), illetve olyan bizonyítások amik segítik az adott anyagrész elmélyítését.
+
+Elméletileg semmi olyat nem tartalmaz a függelék, ami önmagában vizsgán elvárás lenne.
+% TODO: IFT proof
+
+\input{appendix/exact-uni-proof}
 
 \end{document}

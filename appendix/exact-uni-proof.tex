@@ -1,0 +1,53 @@
+\section[Egzakt differenciálegyenletek - k.é.p. egyértelmű megoldhatósága]%
+        {Egzakt differenciálegyenletek –\\ kezdetiérték-probléma egyértelmű megoldhatósága}\label{sec:egz-uni-proof}
+
+\begin{theorem*}
+Bármilyen egzakt differenciálegyenletre vonatkozó kezdetiérték-probléma megoldható, és van olyan $\psi$ megoldása, amivel minden $\varphi$ megoldásra
+$$\varphi(x) = \psi(x) \qquad (x \in \dom_\varphi \cap \dom_\psi)$$
+\end{theorem*}
+
+\begin{proof}
+\
+
+Legyenek $I,J$ nyílt intervallumok, $g,\, h : I \times J \to \R$ amikre $g,h \in C$ és $0 \notin \rng_h$ teljesülnek.
+
+Tegyük fel továbbá, hogy az $I \times J \ni (x,y) \mapsto \big(g(x,y),\,h(x,y)\big) \in \R^2$ leképezésnek $G : I \times J \to \R$ egy primitív függvénye, azaz $\grad G = (\partial_1G,\,\partial_2G) = (g,h)$.
+
+Keresünk ekkor olyan $\varphi \in I \to J$ függvényt, amire $\dom_\varphi$ nyílt és
+\begin{equation}\label{eq:egz-cond}
+    \varphi'(x) = -\frac{g(x,\varphi(x))}{h(x,\varphi(x))} \qquad (x \in \dom_\varphi)
+\end{equation}
+
+Legyenek adottak továbbá valamilyen $\tau \in I,\, \xi \in J$ értékek, amikre elvárjuk, hogy $\tau \in \dom_\varphi$ és $\varphi(\tau) = \xi$ teljesüljenek.
+
+A \eqref{eq:egz-cond} egyenlőségből és $0 \notin \rng_h$ feltételből kiindulva,
+$$g(x,\varphi(x)) + h(x,\varphi(x)) \cdot \varphi'(x) = 0 \qquad (x \in \dom_\varphi)$$
+
+Definiáljuk az $F(x) := G(x, \varphi(x)) \quad (x \in \dom_{\varphi})$ függvényt. Mivel $G$ függvény differenciálható, ezért ha létezik $\varphi$ megoldás\footnote{Ami ekkor a feltételeink miatt természetesen differenciálható is.}, akkor
+\begin{align*}
+F'(x) &= \partial_1 G(x, \varphi(x)) \cdot 1 + \partial_2 G(x,\varphi(x)) \cdot \varphi'(x) \\ &= g(x,\varphi(x)) + h(x,\varphi(x)) \cdot \varphi'(x) = 0 \quad (x \in \dom_\varphi)
+\end{align*}
+
+Mivel $\dom_F = \dom_\varphi$, így $F$ konstans függvény, tehát
+$$\exists c \in \R\ \forall x \in \dom_\varphi : G(x, \varphi(x)) = c$$
+
+Továbbá a $\varphi(\tau) = \xi$ kezdetiérték-feltétel miatt spec. $G(\tau, \xi) = c$.
+
+Mivel $G$-t egy primitív függvénynek állítottuk elő, feltehetjük, hogy
+\begin{equation}\label{eq:egz-uni-impl}
+    G(x,\varphi(x)) = 0 \qquad (x \in \dom_\varphi)
+\end{equation}
+teljesül, megfelelő konstans választás mellett.
+
+Ekkor \eqref{eq:egz-uni-impl} alapján látjuk, hogy $\varphi$ egy $G$ által meghatározott implicitfüggvény. Vagyis a vizsgált k.é.p. minden megoldása a \eqref{eq:egz-uni-impl} \emph{implicitfüggvény-egyenletből} határozható meg.
+
+A feltételek alapján $G \in C^1,\ G(\tau, \xi) = 0$ és $\partial_2 G(\tau, \xi) = h(\tau, \xi) \ne 0$ is teljesülnek. Vagyis az \emph{implicitfüggvény-tétel} alkalmazható $G$-re a $(\tau, \xi)$ pontban.
+
+A tétel szerint ekkor $\exists \psi \in I \to J$, amire $\dom_\psi \subset I$ nyílt, $\tau \in \dom_\psi,\ G(x, \psi(x)) = 0 \enspace (x \in \dom_\psi)$ és $\psi(\tau) = \xi$.
+
+Valamint a deriváltjáról tudjuk, hogy
+$$\psi'(x) = -\frac{\partial_1 G(x,\psi(x))}{\partial_2G(x,\psi(x))} = -\frac{g(x,\psi(x))}{h(x,\psi(x))} \qquad (x \in \dom_\psi)$$
+
+Tehát $\psi$ is egy megoldása a vizsgált egzakt differenciálegyenletre vonatkozó \sloppy kezdetiérték-problémának.
+Valamint az implicitfüggvény-tétel azt is garantálja, hogy a megfelelő $(\tau, \xi)$ körüli környezeten vett leszűkítés mellett $\varphi(x) = \psi(x)$ teljesülni fog.
+\end{proof}

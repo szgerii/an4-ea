@@ -26,7 +26,7 @@ $F(0) = f(0 + a) - f(a) = 0$.
 
 \ref{cond:loc-inv-det} feltételt is nézzük meg. $F'(x) = f'(x + a)$, mivel az $f(a)$ konstans tag kiesik, azon felül pedig csak egy eltolást teszünk, ez nincs kihatással a derivált alakjára.
 
-Kicsit formálisabban nyilatkozva, a totális derivált definíciója\footnote{Ez egy alternatív felírás, nem teljesen az az alak, amit Analízis III.-on vettünk. Aki szeretne ehelyett a lineáris közelítéses alakból kiindulni, nyugodtan megteheti, de mivel ez nem képzi közvetlen a tananyag részét, én kihagytam az eféle csemegézéseket.} alapján:
+Kicsit formálisabban nyilatkozva, a totális derivált definíciója\footnote{Ez egy alternatív felírás, nem teljesen az az alak, amit Analízis III.-on vettünk. Aki szeretne ehelyett a lineáris közelítéses alakból kiindulni, nyugodtan megteheti, de mivel ez nem képezi közvetlen a tananyag részét, én kihagytam az eféle csemegézéseket.} alapján:
 \begin{gather*}
 F'(x) = \lim_{h\to0}\frac{\norm {F(x + h) - F(x) - L(h)}}{\norm h} = \lim_{h\to0} \frac {\norm{f(x+a+h)- f(a) - f(x+a) + f(a) -L(h)}}{\norm h} \\
 = \lim_{h\to 0}\frac{\norm{f(x+a+h) - f(x + a) - L(h)}}{\norm h} = f'(x + a)

@@ -1,532 +1,305 @@
-\chapter{*Feltételes szélsőérték}
+\chapter{Implicit- és inverzfüggvény}\label{chapter:tetel2}
 
 \section{Követelmények}
 \begin{enumerate}
-    \item Feltételes szélsőérték
-    \item Szükséges feltétel (bizonyítással)
-    \item Elégséges feltétel
+    \item Implicitfüggvény fogalma
+    \item Kapcsolata a feltételes szélsőérték problémával és inverzfüggvénnyel
+    \item Implicitfüggvény-tétel
+    \item Inverzfüggvény-tétel
+    \item Inverzfüggvény-tétel bizonyításának vázlata
 \end{enumerate}
 
-\section{Lokális szélsőérték és feltételei}\label{sec:loc-extr-reminder}
+\section{Implicitfüggvény}
 
-Ez a szekció (\ref{sec:loc-extr-reminder}) kizárólag ismétlésként szerepel, nem képezi a tárgyi tananyag részét.
+Az \ref{sec:impl-example} példában látott változók közötti ``összefüggést'' szeretnénk általánosítani.
 
-\subsection{Definíció}
+\subsection{Felvezetés, definíció}
 
-Legyen $1 \le n \in \N$ és $f \in \R^n \to \R$.
+Legyen $n,m \in \N,\, 2 \le n$ és $1 \le m < n$.
 
-Ekkor $f$-nek az $a \in \dom_f$ helyen \textbf{lokális maximuma (minimuma)} van, azaz az $a$ pont egy \textbf{lokális maximumhely (minimumhely)}, ha:
+Ha $\xi = (\xi_1, \ldots, \xi_n) \in \R^n$, akkor szedjük szét egy $m$ hosszú részre és a maradékra:
 
-$\exists K(a) = K_r(a) = \{x \in \R^n : \norm{x-a}_2 < r\}\quad (r > 0)$ amire $f(x) \le f(a) \quad (x \in K(a) \cap \dom_f)$.
+$$x := (\xi_1, \ldots, \xi_{n-m})\in \R^{n-m}, \  y := (\xi_{n-m+1}, \ldots, \xi_n) \in \R^m$$
 
-Lokális minimum esetén pedig $f(x) \ge f(a)$.
+Ezt $\xi = (x,y)$-al fogjuk jelölni, röviden: $\R^n \equiv \R^{n-m} \times \R^m$.
 
-Ekkor $f(a)$ az $f$ \textbf{lokális maximuma (minimuma)}.
+Ezt alkalmazva egy $f = (f_1, \ldots, f_m) \in \R^n \to \R^m$ függvényt fel tudunk írni egy kétváltozós vektorfüggvényként, ha $f \in \R^{n-m} \times \R^m \to \R^m$-ként kezeljük.
 
-Általánosan pedig $f$-nek az $a$-ban \textbf{lokális szélsőértéke} van, azaz az $a$ pont egy \textbf{lokális szélsőértékhelye} $f$-nek, ha $f$-nek $a$-ban lokális maximuma vagy lokális minimuma van.
+Tegyük fel, hogy $\exists (a,b) \in \dom_f : f(a,b) = 0$, azaz $(a,b)$ zérushelye $f$-nek.
 
-\subsection{Kvadratikus alak}
+Továbbá tegyük fel, hogy $\exists K(a) \in \R^{n-m}, K(b) \in \R^m : \forall x \in K(a) : \exists! y \in K(b) : f(x,y)=0$.
 
-Legyen $n \in \N$ és $A \in \R^{n\times n}$ szimmetrikus.
+Definiáljuk ekkor $\varphi(x) := y$-al a $\varphi : K(a) \to K(b)$ függvényt, azaz $f(x,\varphi(x)) = 0 \quad (x \in K(a))$.
 
-Ekkor az $A$ mátrix által meghatározott \textbf{kvadratikus alak}:
+Fontos, hogy $y$-t \emph{egyértelműen} tudjuk hozzárendelni $x$-hez a fenti feltevésben, azaz $y = \varphi(x)$ az egyetlen $y \in K(b)$, amire $f(x,y)=0$.
 
-$Q \in \R^n \to \R,\ Q(x) = \dprod{Ax,\,x}\quad (x \in \R^n)$.
-
-\subsubsection{Egy pontban kétszer differenciálható függvények}
-
-Egy $f \in D^2\{a\}$ függvényhez az $a$-beli Hesse-mátrixból kapott kvadratikus alakot $Q_a^f$-el jelöljük, azaz:
-
-$\displaystyle Q_a^f(x) := \dprod{f''(a)x,\,x} = \sum_{i=1}^n\sum_{j=1}^n\partial_{ij}f(a)x_ix_j \quad (x \in \R^n)$
-
-\subsubsection{Definitség}
-
-Egy $Q$ kvadratikus alak
-
-\begin{enumerate}[label=(\alph*),itemsep=2pt,topsep=2pt]
-    \item pozitív definit, ha $Q(x) > 0 \quad (0 \ne x \in \R^n)$
-    \item negatív definit, ha $Q(x) < 0 \quad (0 \ne x \in \R^n)$
-    \item pozitív szemidefinit, ha $Q(x) \ge 0 \quad (x \in \R^n)$
-    \item negatív szemidefinit, ha $Q(x) \le 0 \quad (x \in \R^n)$
-    \item indefinit, ha $\exists x,y \in \R^n : Q(x) < 0 < Q(y)$
-\end{enumerate}
-
-\subsection{Feltételek}
-
-\subsubsection{Elsőrendű szükséges feltétel}
-
-Legyen $f \in \R^n \to \R$ és tfh. egy $a \in \intp \dom_f$ helyen lokális szélsőértéke van, továbbá $f \in D\{a\}$.
-
-Ekkor $f'(a) = \grad f(a) = \big(\partial_1f(a),\, \ldots,\, \partial_nf(a)\big) = 0$, vagyis $\partial_1f(a) = \ldots = \partial_nf(a) = 0$.
-
-\subsubsection{Másodrendű elégséges feltétel}
-
-Legyen $f \in \R^n \to \R$ és tfh. egy $a \in \intp \dom_f$ helyen teljesül, hogy:
-
-\begin{enumerate}[label=(\alph*),itemsep=1pt, topsep=1pt]
-    \item $f \in D^2\{a\}$
-    \item $\grad f(a) = 0$
-    \item $Q_a^f$ pozitív (negatív) definit
-\end{enumerate}
-
-Ekkor $f$-nek $a$-ban lokális minimuma (maximuma) van.
-
-\subsubsection{Másodrendű szükséges feltétel}
-
-Legyen $f \in \R^n \to \R$ és tfh. egy $a \in \intp \dom_f$ pontban:
-
-\begin{enumerate}[label=(\alph*),itemsep=1pt,topsep=1pt]
-    \item $f \in D^2\{a\}$
-    \item $f$-nek az $a$-ban lokális minimuma (maximuma) van
-\end{enumerate}
-
-Ekkor $\grad f(a) = 0$ és $Q_a^f$ kvadratikus alak pozitív (negatív) szemidefinit.
-
-\newpage
-
-\section{Feltételes szélsőérték}
-
-\subsection{Felvezető feladat}\label{sec:impl-example}
-
-A következő feladat a feltételes szélsőérték és implicitfüggvények felvezetésére szolgál.
-
-Egységnyi kerületű, $x,\ y$ oldalhosszúságú téglalapok közül keressük a legnagyobb területűt. Azaz keressük az $xy$ szorzat maximumát, ha $x>0,\ y>0$ és $2x+2y = 1$.
-
-Legyen $f(x,y) := xy,\ g(x,y) := 2x + 2y-1 \quad \big((x,y) \in \R^2\big)$.
-Ekkor az $f|_{\{g=0\}}$ leszűkítés legnagyobb értékét keressük.
-
-Emlékezzünk, hogy a korábban vett lokális szélsőértékre vonatkozó elégséges és szükséges feltétel tételek az értelmezési tartomány egy belső pontjára lettek kimondva.
-
-Gyors emlékeztető a belső pont fogalmáról:
-
-$(X,\varrho)$ metrikus térben a $\emptyset \ne A \subset X$ halmaznak $a \in A$ belső pontja, ha:
-$\exists K(a) : K(a) \subset A$.
-
-$\R^2$ esetén ez azt fogja jelenteni, hogy valamilyen távolságig mindkét változó szerinti, egymástól függetlenül tett kimozdulásnak benne kéne lennie a halmazban. Ez viszont $\mathcal D_{f|_{\{g=0\}}}$-nél nem fog működni, mivel a $g=0$ feltételünk meghatároz egy összefüggést $x$ és $y$ között.
-
-A következő ábrán jól láthatóak a különböző itt vizsgált függvények :
-
-\begin{center}
-\begin{tikzpicture}
-\begin{groupplot}[
-        group style={
-            group size=2 by 2,
-            horizontal sep=1.5cm,
-            vertical sep=2.25cm
-        },
-        view={-30}{45},
-        domain=0:0.6,
-        samples=40,
-        shader=flat,
-        xlabel={$x$}, ylabel={$y$}, zlabel={$z$},
-        scaled ticks=false,
-        tick label style={/pgf/number format/fixed}
-    ]
-
-    \nextgroupplot[title={$f$}, shader=interp]
-
-    \addplot3[
-        surf,
-        colormap/hot
-    ]
-    {x * y};
-
-    \nextgroupplot[title={$g$ és $\{g=0\}$}]
-
-    \addplot3[
-        surf,
-        colormap/cool
-    ]
-    {2*x + 2*y - 1};
-
-    \addplot3[
-        very thick,
-        color=black,
-        domain=0:0.5,
-        y domain=0:0.5
-    ]
-    (x, {0.5 - x}, 0);
-
-    \nextgroupplot[title={$\{g=0\}$}, view={0}{90}]
-
-    \addplot3[
-        very thick,
-        color=black,
-        domain=0:0.5
-    ]
-    (x, {0.5 - x}, 0);
-
-    \nextgroupplot[title={$f|_{\{g=0\}}$}, view={-30}{45}]
-
-    \addplot3[
-        surf,
-        colormap/hot,
-        restrict z to domain=0:1
-    ]
-    (x, {0.5 - x}, {x*(0.5-x)});
-
-    \addplot3[
-        very thick,
-        dashed,
-        color=blue,
-    ] coordinates {
-        (0, 0.25, 0)
-        (0.25, 0.25, 0)
-    };
-    
-    \addplot3[
-        very thick,
-        dashed,
-        color=blue,
-    ] coordinates {
-        (0.25, 0, 0)
-        (0.25, 0.25, 0)
-    };
-
-    \addplot3[
-        very thick,
-        dashed,
-        color=blue,
-    ] coordinates {
-        (0.25, 0.25, 0)
-        (0.25, 0.25, 0.0625)
-    };
-\end{groupplot}
-\end{tikzpicture}
-\end{center}
-
-\newpage
-
-Látjuk, hogy $\displaystyle\mathcal D_{f|_{\{g=0\}}} = \{g=0\}$ halmaz egy egyenes pontjait írja le, így természetesen egyik pontja se lehet belső pont, azaz tényleg nem alkalmazhatóak az eddigi tételeink. Ettől függetlenül persze az $f|_{\{g=0\}}$ leszűkítésnek lehetnek szélsőértékei, ahogy azt az utolsó ábra is mutatja.
-
-\textbf{Ötlet:} Vegyük a $h(x) := \frac 12 - x \quad (x \in \R)$ függvényt, ami a $\{g=0\}$ halmaz által leírt egyenes explicit alakja, vagyis $\graf h = \{g = 0\}$.
-
-Ekkor $f|_{\{g=0\}}$ helyett vizsgálhatjuk a $\Phi : \R \to \R,\ \Phi(x) := f(x,h(x)) = x(\frac 12 - x) \ (x \in \R)$ függvényt. Vegyük észre, hogy $\mathcal D_\Phi = \R$ minden pontja belső pont, azaz probléma nélkül alkalmazhatóak rá a lokális szélsőértékre vonatkozó szükséges és elégséges feltételek tételei.
-
-$\Phi'(x) = \frac 12 - 2x = 0 \Longleftrightarrow x = \frac 14 \implies y = (\frac 12 - x) = \frac 14$ és $\Phi''(x) = -2 < 0\implies$ maximum.
-
-Tehát az egységkerületű téglalapok közül az $x=y=\frac14$ oldalhosszú négyzet lesz a maximális területű.
-
-\begin{center}
-    \begin{tikzpicture}
-        \begin{axis}[
-            title={Az egyváltozós $\Phi$ függvény maximuma},
-            scaled ticks=false,
-            tick label style={/pgf/number format/fixed},
-            xlabel={$x$},
-            ylabel={$\Phi(x)$},
-            height=6cm,
-            grid=major,
-            ymin=0,
-            ymax=0.08
-        ]
-
-        \addplot[blue, thick, domain=0:0.5, samples=60] {x*(0.5-x)};
-        \addplot[red, dashed, thick] coordinates {(0.25,0) (0.25, 0.0625)};
-        \addplot[only marks, mark=*, red] coordinates {(0.25, 0.0625)};
-        \node[red, above] at (axis cs:0.25,0.065) {$x$=0.25};
-            
-        \end{axis}
-    \end{tikzpicture}
-\end{center}
-
-\emph{Nagyon} informálisan nézve: itt azzal, hogy az $f$ függvény egyik változóját a másikból ki tudtuk fejezni (persze csak a leszűkítésen!), kvázi "elcsaltunk" egy dimenziót. A maradék dimenziónkban pedig tökéletesen tudunk mozogni minden irányba, kb. "hozzáillesztve" az "elcsalt" dimenzió-beli pozíciónkat. A fő különbség, hogy itt már nem tárol el az egyik függvény változó "felesleges" információt, azaz a belső pont megkötés élesedik arra az egy változónkra, ami az összes információt tartalmazza. Ez ellentétben áll az eredeti felállással, ahol azt vártuk volna el, hogy két, "közös információt" is tartalmazó, változó külön-külön is szabadon mozgatásával a halmazon belül maradjunk. A $h$ függvény bevezetésével ez megoldódik, mivel $\Phi$-ben a $h$ segítségével mi adjuk meg, hogy az egy változónk elmozgatása szerint a másikat hogyan kell módosítani (tulajdonképpen a "közös információ" alapján).
-
-A fenti feladat ezzel az intuícióval több változóra is kiáltalánosítható, a feltételes szélsőérték (és később az implicitfüggvény) fogalmának bevezetésével.
-
-\subsection{Definíció}
-
-Legyen $1 \le n, m \in \N,\ \emptyset \ne U \subset \R^n$ és $f : U \to \R, g = (g_1,\,\ldots,\, g_m) : U \to \R^m$.
-
-Ekkor $f$ függvénynek a \textbf{$g = 0$ feltételre vonatkozóan feltételes lokális maximuma (minimuma) van a $c \in \{g = 0\} := \{\xi \in U : g(\xi) = 0\}$ pontban}, ha az $\tilde f(\xi) := f(\xi)\quad (\xi \in \{g=0\})$ függvénynek $c$-ben lokális maximuma (minimuma) van.
-
-Továbbá elnevezzük $f(c)$-t \textbf{feltételes lokális maximum (minimum)} vagy \textbf{szélsőérték}nek, és $c$-t pedig \textbf{feltételes lokális maximumhely (minimumhely)} vagy \textbf{szélsőértékhely}nek.
-
-\subsubsection{Megjegyzések}
-
-Feltesszük továbbá, hogy $\{g=0\} \ne \emptyset$,
-
-A definícióban szereplő $\tilde f(\xi)$ az $f|_{\{g=0\}}$ leszűkítés.
+Ezt a $\varphi$ függvényt az $f$ által (az $(a,b)$ körül) meghatározott \textbf{implicitfüggvénynek} nevezzük.
 
 \begin{samepage}
-Tehát, ha $f$-nek egy $c \in \{g=0\}$ pontban lokális szélsőértéke van a $g=0$ feltételre nézve, akkor $\exists K(c)$, amire maximumnál $f(\xi) \le f(c)$, minimumnál $f(\xi) \ge f(c) \quad (\xi \in \{g=0\}\cap K(c))$.
+A feltételekből nyilvánvaló, hogy $\varphi(a) = b$, általánosan pedig felírható a következő egyenletrendszer:
+$$
+\begin{aligned}
+f_1(x_1, \ldots, x_{n-m},& y_1, \ldots, y_m) =\ & 0 \\
+&\vdots & \vdots \\
+f_m(x_1, \ldots, x_{n-m},& y_1, \ldots, y_m) =\ & 0
+\end{aligned}
+$$
 \end{samepage}
 
-\section{Feltételek}
+Ennek a rendszernek minden $x \in K(a)$ mellett egyértelműen létezik $y \in K(b)$ megoldása. Vagyis az $x_1, \ldots, x_{n-m}$ paraméterekből ki tudjuk fejezni az $y_1, \ldots, y_m$ változókat.
 
-\subsection{Elsőrendű szükséges feltétel}
+Legyen $F(x,y) := (x,f(x,y)) \quad ((x,y) \in \dom_f)$, ekkor $F \in \R^n \to \R^n$ és spec. $F(a,b) = (a,0)$.
 
-\subsubsection{Tétel}
+\sloppy Ha egy $(x,y) \in \dom_f$ helyen $f \in D\{(x,y)\}$, akkor (összetett fv. deriváltja tétel alapján) $F~\in~D\{(x,y)\}$ és
 
-Legyen $1 \le n,m \in \N,\ m < n,\ \emptyset \ne U \subset \R^n$ nyílt és $f : U \to \R,\ g = (g_1,\,\ldots,\,g_m) : U \to \R^m$.
+$$
+F'(x,y) = 
+\begin{bmatrix}
+    I & \Theta \\
+    \partial_1f(x,y) & \partial_2f(x,y)
+\end{bmatrix} \in \R^{n \times n}
+$$
 
-Továbbá tegyük fel, hogy
+ahol $I$ az $\R^{(n-m)\times(n-m)}$-beli egységmátrix, $\Theta$ az $\R^{(n-m) \times m}$-beli nullmátrix.
 
-\begin{enumerate}[label=(\alph*),itemsep=1pt,topsep=1pt]
-    \item $f \in D$
-    \item $g \in C^1$
-    \item $f$-nek $c\in\{g=0\}$ helyen feltételes lokális szélsőértéke van $g=0$ feltételre nézve
-    \item $g'(c)$ Jacobi-mátrix rangja egyenlő $m$-mel
-    ($\Leftrightarrow$ a gradiensvektorok lineárisan függetlenek),
-    azaz $\rang g'(c) = m$. Ezt hívjuk \emph{rangfeltételnek}.
+Talán kicsit könnyebben feldolgozható a mátrix felépítése és a dimenziók összeadódása a következő, kibontott alakból:
+
+$$
+F'(x,y) = 
+\begin{bmatrix}
+    1 & 0 & \cdots & 0 & \, & 0 & 0 & \cdots & 0 \\
+    0 & 1 & \cdots & 0 & \, & 0 & 0 & \cdots & 0 \\
+      &   & \ddots &   & \, &  &   & \vdots &   \\
+    0 & 0 & \cdots & 1 & \, & 0 & 0 & \cdots & 0 \\
+    \\
+    \partial_{x_1}f_1 & \partial_{x_2}f_1 & \cdots & \partial_{x_{n-m}}f_1 & \, & \partial_{y_1}f_1 & \partial_{y_2}f_1 & \cdots & \partial_{y_m}f_1 \\
+    \partial_{x_1}f_2 & \partial_{x_2}f_2 & \cdots & \partial_{x_{n-m}}f_2 & \, & \partial_{y_1}f_2 & \partial_{y_2}f_2 & \cdots & \partial_{y_m}f_2 \\
+    && \ddots & &&&& \ddots\\
+    \partial_{x_1}f_m & \partial_{x_2}f_m & \cdots & \partial_{x_{n-m}}f_m & \, & \partial_{y_1}f_m & \partial_{y_2}f_m & \cdots & \partial_{y_m}f_m \\
+\end{bmatrix}
+$$
+
+% TODO: parciális deriváltmátrix
+
+Ha $f \in C^1\{(a,b)\}$, akkor $F \in C^1\{(a,b)\}$.
+
+Meggondolható (pl. mindig első sor szerint számolva), hogy $\det F'(a,b) = \det \partial_2 f(a,b)$, tehát $\det \partial_2 f(a,b) \ne 0 \implies \det F'(a,b) \ne 0$.
+
+\subsection{Implicitfüggvény-tétel}\label{sec:impl-fv}
+
+Legyen $n,m \in \N,\  2 \le n,\ 1 \le m < n$ és $f \in \R^{n-m} \times \R^m \to \R^m$.
+
+Tegyük fel, hogy $f \in C^1$ és egy $(a,b) \in \intp \dom_f$ helyen $f(a,b) = 0, \text{ ill. } \det \partial_2 f(a,b) \ne 0$, azaz $\partial_2f(a,b)$ nem szinguláris.
+\vspace{8pt}
+
+Ekkor alkalmas $K(a), K(b)$-vel létezik az $f$ által az $(a,b)$ körül meghatározott $\varphi : K(a) \to K(b)$ implicitfüggvény. Továbbá $\varphi \in C^1$ és $\varphi'(x) = -\partial_2f(x,\varphi(x))^{-1} \cdot \partial_1 f(x,\varphi(x)) \enspace (x \in K(a))$.
+
+\section{Lokális invertálhatóság}
+
+\subsection{Egyváltozós eset}
+
+Emlékeztetőnek nézzük meg az egyváltozós valós függvényeket.
+
+Legyen $f \in \R \to \R,\ f \in C^1\{a\}$ és $f'(a) \ne 0$.
+\vspace{8pt}
+
+Ekkor $\exists r > 0$, amivel $I := (a-r,\ a+r) \subset \dom_f$ bevezetésével:
+\begin{enumerate}[label=(\alph*), itemsep=1pt, topsep=4pt]
+    \item $\exists (\restrict f I)^{-1} =: g$ inverzfüggvény
+    \item $g \in D$
+    \item $g'(x) = \dfrac 1 {f'(g(x))} \quad (x \in \dom_g)$
 \end{enumerate}
 
-Ekkor $\exists \lambda \in \R^m : \grad (f + \lambda g)(c) = 0$, ahol $\displaystyle(\lambda g)(\xi) := \dprod {\lambda,g(\xi)} = \sum_{i=1}^m \lambda_ig_i(\xi) \quad (\xi \in U)$.
-
-Vegyük észre, hogy a tétel nagyon hasonló a feltétel nélküli esethez, csak itt a vizsgált $f$ függvény helyett az $f_\lambda := f + \lambda g$ függvényre vonatkozik. A $\lambda_i$-ket \textbf{Lagrange-multiplikátor} nevezzük, $f_\lambda$-t pedig \textbf{Lagrange-függvénynek}.  Hasonlóan fog felépülni a következő két tétel is.
-
-\subsection{Másodrendű elégséges feltétel}
-
-\subsubsection{Feltételes definitség}
-
-A tétel kimondása előtt be kell vezetnünk a feltételes definitség fogalmát.
-
-Legyen $Q : \R^n \to \R$ egy kvadratikus alak és $B \in \R^{m\times n}$. Vegyük az $\mathcal A_B := \{x \in \R^n : B\cdot x = 0\}$ halmazt.
-Továbbá tfh. $m < n$ és $\rang B = m$.
-
-Ekkor a $Q$ kvadratikus alak $B$-re nézve:
-\begin{enumerate}[label=(\alph*),itemsep=1pt,topsep=1pt]
-    \item \textbf{feltételesen pozitív definit}, ha $Q(x) > 0 \quad (0 \ne x \in \mathcal A_B)$
-    \item \textbf{feltételesen negatív definit}, ha $Q(x) < 0 \quad (0 \ne x \in \mathcal A_B)$
-    \item \textbf{feltételesen pozitív szemidefinit}, ha $Q(x) \ge 0 \quad (x \in \mathcal A_B)$
-    \item \textbf{feltételesen negatív szemidefinit}, ha $Q(x) \le 0 \quad (x \in \mathcal A_B)$
-\end{enumerate}
-
-\subsubsection{Tétel}
-
-\begin{samepage}
-
-Legyen $1 \le n,m \in \N,\, m < n,\, \emptyset \ne U \subset \R^n$ nyílt és $f : U \to \R,\ g : U \to \R^n$. 
-    
-Továbbá tegyük fel, hogy
-\begin{enumerate}[label=(\alph*), itemsep=1pt, topsep=1pt]
-    \item $f,\,g \in D^2$
-    \item $c \in \{g=0\}$-ben $\rang g'(c) = m$
-    \item egy $\lambda \in \R^m$ vektorral vett $f_\lambda := f + \lambda g$-re:
-    \begin{enumerate}[label=(\roman*),itemsep=1pt,topsep=1pt]
-        \item $\grad f_\lambda(c) = 0$
-        \item $Q_c^{f_\lambda}$ kvadratikus alak a $g'(c)$ mátrixra nézve feltételesen pozitív (negatív) definit
-    \end{enumerate}
-\end{enumerate}
-
-Ekkor $f$-nek $c$-ben a $g=0$ feltételre vonatkozóan feltételes lokális minimuma (maximuma) van.
-
-\end{samepage}
-
-\subsection{Másodrendű szükséges feltétel}
-
-\subsubsection{Tétel}
-
-Legyen $1 \le n,m \in \N,\, m < n,\, \emptyset \ne U \subset \R^n$ nyílt, $f : U \to \R,\, g: U \to \R^m$ és $c \in \{g=0\}$.
-
-Továbbá tegyük fel, hogy
-\begin{enumerate}[label=(\alph*), itemsep=1pt, topsep=1pt]
-    \item $f,\,g \in D^2$
-    \item $\rang g'(c) = m$
-    \item $f$-nek $c$-ben a $g=0$ feltételre vonatkozóan feltételes lokális minimuma (maximuma) van
-\end{enumerate}
-
-Ekkor $\exists \lambda \in \R^m$, amivel $f_\lambda := f + \lambda g$-re teljesül, hogy
-
-\begin{enumerate}[label=(\alph*), itemsep=1pt, topsep=1pt]
-    \item $\grad f_\lambda(c) = 0$
-    \item $Q_c^{f_\lambda}$ kvadratikus alak $g'(c)$ mátrixra nézve feltételesen pozitív (negatív) szemidefinit
-\end{enumerate}
+Ezt szeretnénk általánosítani többváltozós vektorfüggvények esetére.
 
 \needspace{7\baselineskip}
-\subsection{Megjegyzések}
+\subsection{Lokális inverz}
 
-\subsubsection{$m = n$ eset}
+Legyen $1 \le n \in \N,\ f \in \R^n \to \R^n$ és $a \in \intp \dom_f$.
 
-A feltételeknél $m < n$ feltevéssel éltünk, azonban könnyen belátható, hogy $m = n$ esetén is működnek az állítások. Nézzük például az elsőrendű szükséges feltételt.
+Az $f$ függvény \textbf{lokálisan invertálható} az $a$-ban, ha $\exists K(a) \subset \dom_f$, amire a $g := \restrict f {K(a)}$ leszűkítés invertálható.
 
-\begin{samepage}
-Ilyenkor $g'(c) \in \R^{n \times n}$ és a $\rang g'(c) = m = n$ rangfeltétel miatt a
-$$
-g'(c) = 
-\begin{bmatrix}
-\grad g_1(a) \\
-\vdots \\
-\grad g_n(a)
-\end{bmatrix}
-\in \R^{n \times n}
-$$
-Jacobi-mátrix \emph{invertálható.}
-\end{samepage}
+Ebben az esetben a $g^{-1}$ inverzfüggvényt az $f$ fv. $a$-beli \textbf{lokális inverzének} nevezzük.
 
-Vagyis a $\grad g_k(a) \in \R^n \ (k = 1,\ldots,n)$ vektorok lineárisan függetlenek, azaz bázist alkotnak $\R^n$-ben. Így bármilyen $\R^n$-beli vektor előállítható a lineáris kombinációjukként, spec.:
-$$\exists! \lambda_j \in \R \enspace (j = 1,\ldots, n) : \sum_{j=1}^n \lambda_j \grad g_j(c) = -\grad f(c)$$
+\begin{comment}
 
-Tehát a $\lambda := (\lambda_1, \ldots, \lambda_n) \in \R^n$ vektorral teljesül, hogy $\grad (f + \lambda g)(c) = 0$. Ez alapján $n = m$ esetben is teljesül a tétel, azonban ott triviális.
+\subsection{Úton az inverzfüggvény-tétel felé}
 
-\subsubsection{$\lambda$ és $c$ értékek meghatározása}
+A következő tétel ad egy elégséges feltételt a lokális inverz létezésére és folytonosságára.
 
-Szeretnénk felírni egy egyenletrendszert, amiből meghatározhatjuk a $\lambda_1,\ldots,\lambda_m$ és $c_1,\ldots,c_n$ értékeket. Ehhez $n + m$ darab egyenlet fog kelleni.
+\subsubsection{Tétel}
 
-Vegyük az $\displaystyle f_\lambda := f + \lambda g = f + \sum_{k=1}^m \lambda_k \cdot g_k$ függvényt.
+Legyen $f \in \R^n \to \R^n,\, a \in \intp \dom_f$, és tfh. $f \in C^1\{a\}$, valamint az $f'(a)$ Jacobi-mátrix invertálható.
 
-Az elsőrendű szükséges feltétel szerint $\grad f_\lambda(c) = 0$, amit ha kibontunk:
+Ekkor $\exists K(a) : \restrict f {K(a)} \text{ injektív}$ és $\phi := \left(\restrict f {K(a)}\right)^{-1}$-ra $\phi \in C^1$ és $\phi'(x) = \big(f'(\phi(x))\big)^{-1} \ (\forall x \in \dom_\phi)$.
 
-$$\partial_j f(c_1,\ldots,c_n) + \sum_{k=1}^m\lambda_k \partial_j g_k(c_1,\ldots,c_n)=0 \quad (j = 1,\ldots, n)$$
+Az invertálhatóságot úgy is megfogalmazhatjuk, hogy $f'(a) \in \R^{n \times n}$ mátrixra $\det f'(a) \ne 0$.
 
-Ez összesen $n$ darab egyenletet fog adni. A maradék $m$ egyenletet a $g(c)=0$ feltételből kapjuk, ugyanis $g_l(c_1, \ldots,c_n) = 0 \quad (l = 1,\ldots,m)$.
+\subsubsection{Bizonyítás vázlata}\label{proof:loc-inv}
 
-\subsubsection{$\R^2$-beli feltételes definitség $g'(c)$-re nézve}\label{note:cond-orto}
+Feltehető, hogy $a = f(a) = 0 \in \R^n,\, f'(0) = (v_{ik})^n_{i,k=1}\in\R^{n \times n}$.
 
-Nézzük a $B := g'(c) \in \R^{m \times n}$, $m$-rangú mátrixszal vett $\mathcal A_B := \{y \in \R^n : B \cdot y = 0\}$ halmazt $m=1,\ n=2$ esetben:
+\end{comment}
 
-Ekkor $0 \ne B = \grad g(c) \in \R^2$ és $\mathcal A_B = \{y \in \R^2 : \dprod{\grad g(c),\,y} = 0\}$.
+\subsection{Inverzfüggvény-tétel}
 
-Skaláris szorzat tulajdonságai alapján ekkor tudjuk, hogy $x \in \mathcal A_B$ azzal ekvivalens, hogy $x$ merőleges a gradiensre. Vagyis az $\mathcal A_B$ halmaz az origón átmenő, $\grad g(c)$ vektorra merőleges egyenes.
+\subsubsection{Tétel}
 
-Hasonlóan $m=1,\, n > 2$ esetben pedig $\grad g(c)$ és $x$ ortogonálisak kell, hogy legyenek.
-
-\subsubsection{Példafeladat}
-
-Legyen $n := 2,\, m:=1,\,f(x,y) := 2x + 3y$ és $g(x,y) := x^2+y^2-1 \enspace \big((x,y) \in \R^2\big)$.
-
-Ezek alapján definiáljuk $f_\lambda$-t: $f_\lambda(x,y) := 2x + 3y + \lambda(x^2+y^2-1) \enspace \big((x,y) \in \R^2\big)$.
-
-Ekkor az elsőrendű szükséges feltétel szerint a következő egyenletrendszer megoldásaiban lehet csak feltételes lokális szélsőértéke a függvénynek $g = 0$ feltételre nézve:
-\begin{alignat*}{2}
-    \partial_1 f_\lambda(x,y) &= 2 + 2\lambda x &&= 0 \\
-    \partial_2 f_\lambda(x,y) &= 3 + 2\lambda y &&= 0 \\
-    g(x,y)                    &= x^2 + y^2 - 1  &&= 0
-\end{alignat*}
-
-Számoljuk ki az egyenletrendszer megoldásait:
-\begin{gather*}
-    x_1 := \frac 2 {\sqrt{13}},\ y_1 := \frac 3 {\sqrt{13}},\ \lambda_1 := -\frac {\sqrt{13}} 2,
-    \\
-    x_2 := -\frac 2 {\sqrt{13}},\ y_2 :=  -\frac 3 {\sqrt{13}},\ \lambda_2 := \frac {\sqrt{13}} 2
-\end{gather*}
-
-Ezekre teljesül, hogy $g'(x_i, y_i) = \grad g(x_i, y_i) = (2x_i, 2y_i) = 2(x_i, y_i) \quad (i = 1,2)$.
-
-Valamint a $c^{(i)} := (x_i, y_i) \in \R^2 \enspace (i = 1,2)$ jelölés bevezetésével:
-$$Q_{c^{(i)}}^{f_\lambda}(x,y) =
-\dprod{
-    \begin{bmatrix}
-        2\lambda_i & 0 \\
-        0 & 2\lambda_i
-    \end{bmatrix}
-    \cdot
-    \xymat
-,\, \xymat}
-=
-\dprod{
-    \begin{bmatrix}
-        2\lambda_ix \\
-        2\lambda_iy
-    \end{bmatrix},
-    \xymat
-}
-=
-2 \lambda_i(x^2 + y^2)$$
-
-\begin{gather*}
-Q_{c^{(1)}}^{f_\lambda}(x,y) = -\sqrt{13}(x^2+y^2) < 0
-\enspace \text{és} \enspace
-Q_{c^{(2)}}^{f_\lambda}(x,y) = \sqrt{13}(x^2+y^2) > 0
-\\[4pt]
-\big((x,y) \in \R^2 \setminus \{(0,0)\}\big)
-\end{gather*}
-
-Tehát $Q_{c^{(1)}}^{f_\lambda}$ negatív definit, $Q_{c^{(2)}}^{f_\lambda}$ pozitív definit, vagyis a másodrendű elégséges feltétel szerint $f$-nek $c^{(1)}$-ben feltételes lokális maximuma, $c^{(2)}$-ben feltételes lokális minimuma van.
-
-\section{Elsőrendű szükséges feltétel bizonyítása}
-
-Ehhez a bizonyításhoz szükséges az implicitfüggvény-tétel (ld. \ref{sec:impl-fv}) ismerete, de hasznos az egész következő fejezet (ld. \ref{chapter:tetel2} tétel) előzőleges átolvasása.
-\vspace{4pt}
-\textsc{Tétel (emlékeztető)}
-
-Legyen $1 \le n,m \in \N,\ m < n,\ \emptyset \ne U \subset \R^n$ nyílt és $f : U \to \R,\ g = (g_1,\,\ldots,\,g_m) : U \to \R^m$.
-
-Továbbá tegyük fel, hogy
-\begin{enumerate}[label=(\alph*),itemsep=1pt,topsep=1pt]
-    \item $f \in D$
-    \item $g \in C^1$
-    \item $f$-nek $c\in\{g=0\}$ helyen feltételes lokális szélsőértéke van $g=0$ feltételre nézve
-    \item $\rang g'(c) = m$
+Legyen $1 \le n \in \N,\, f \in \R^n \to \R^n,\, a \in \intp \dom_f$, továbbá tfh.
+\begin{enumerate}[label=(\alph*),itemsep=1pt,topsep=2pt]
+    \item $f \in C^1\{a\}$
+    \item $\det f'(a) \ne 0$, azaz $f'(a)$ Jacobi-mátrix invertálható ($\Leftrightarrow$ nem szinguláris)
 \end{enumerate}
-Ekkor $\exists \lambda \in \R^m : \grad (f + \lambda g)(c) = 0$, ahol $\displaystyle(\lambda g)(\xi) := \dprod {\lambda,g(\xi)} = \sum_{i=1}^m \lambda_ig_i(\xi) \quad (\xi \in U)$.
-\vspace{-18pt}
-\subsection{Bizonyítás}
 
-Egy gyors lebontása az "objektumainknak", támpontnak a bizonyítás során:
-\begin{itemize}[itemsep=1pt,topsep=1pt]
-    \item $m < n$
-    \item $U \subset \R^n$ nyílt
-    \item $f : U \to \R$ (azaz $f \in \R^n \to \R$) és $f \in D$
-    \item $g : U \to \R^m$ (azaz $g \in \R^n \to \R^m$) és $g \in C^1$
-    \item $\{g=0\} \subset U \subset \R^n$
-    \item $c \in \{g=0\}$, vagyis $c \in \R^n$
-    \item $\rang g'(c) = m$
-\end{itemize}
+\vspace{6pt}
+Ekkor $\exists K(a)$ amin $\restrict f {K(a)}$ invertálható és a $\varphi := \left(\restrict f {K(a)}\right)^{-1}$ lokális inverzfüggvényre $\varphi \in C^1$ és $\varphi'(x) = \big(f'(\varphi(x))\big)^{-1}$ teljesülnek.
 
-\subsubsection{Bizonyítás}
+\subsubsection{Bizonyítás vázlata}
 
-A rangfeltételből tudjuk, hogy $g'(c) \in \R^{m\times n}$ mátrixnak létezik $A \in \R^{m \times m}$ részmátrixa, amire $\det A \ne 0$ (mivel az összes ($m$ darab) sora lineárisan független). 
+\begin{comment}
+A lokális inverzfüggvény-tétel bizonyítása a lokális inverz létezésének és folytonosságának belátásával kezdődik (ld. \ref{proof:loc-inv} tétel).
+\end{comment}
 
-Jelöljük az $A$ mátrixot meghatározó oszlopok indexét $j_1, \ldots, j_m$-el, majd vegyük a következő indexhalmazt:
-$$\{i_1, \ldots, i_{n-m}\} := \{1, \ldots, n\} \setminus \{j_1, \ldots, j_m\}$$
-Ekkor $j_k \enspace (k = 1,\ldots,m)$ a lineárisan független oszlopokat indexeli, $i_k \enspace (k = 1,\ldots,n-m)$ pedig a maradékot.
+A bizonyításból csak a lokális inverz létezését és folytonosságát fogjuk belátni. A teljes bizonyítás is ugyanezzel kezdődik.
 
-Ha nehézséget okoz a bizonyítás megértése, vagy inkább az intuíció az egész mögött, akkor egy rövid, megértést remélhetőleg segítő szekció megtalálható a függelékben (ld. \ref{sec:cond-expl}), azonban ott használva vannak az eddig bevezetett jelölések.
+Definiáljuk először a \emph{zárt környezeteket:} $\overline{K_r(\alpha)} := \{z \in \R^n : \norm {z - \alpha}_\infty \le r\} \enspace (r > 0, \alpha \in \R^n)$.
 
-\bigskip
+Megjegyezzük, hogy így spec. $z \in \overline{K_r(0)} \eqv \norm z_\infty \le r$.
+Jelölje $b := f(a)$.
 
-Vezessük be eszerint az $\R^n \equiv \R^{n-m} \times \R^m$ felbontást, azaz
-\begin{gather*}
-    \xi = (\xi_1, \ldots, \xi_n) = (x,y) \in \R^n, \enspace \text{ahol} \\
-    x := (\xi_{i_1},\ldots,\xi_{i_{n-m}}) \in \R^{n-m},\ y := (\xi_{j_1},\ldots,\xi_{j_m}) \in \R^m
-\end{gather*}
+Ekkor $a = b = 0$ és $f'(0) = I \in \R^{n \times n}$ feltehető, mivel a $G(x) := (f'(a))^{-1}\cdot (f(x+a) - f(a))$ függvény ugyanúgy viselkedik $0$-ban vizsgálva, mint $f$ az $a$-ban (levezetéshez ld. \ref{demo:inv-trans}).
 
-Tehát tulajdonképpen itt az indexek által megadott permutáció szerint átrendeztük a mátrix oszlopait úgy, hogy $y$-ba kerüljenek a lineárisan független oszlopok, $x$-be pedig a maradék.\footnote{Belátható, hogy ez a permutáció nem lesz hatással semmilyen számunkra fontos tulajdonságra nézve. Ez az $i$ és $j$ szerinti indexelés a könyvből származik, a segédanyag egyszerűen felteszi, hogy $A$ az utolsó $m$ oszlopában áll elő $g'(c)$-nek, ekkor $x = (\xi_1,\ldots,\xi_{n-m}),\ y = (\xi_{n-m+1},\ldots,\xi_n)$. Vizsgán ennek is egy teljesen elfogadott módszernek kell lennie, persze indoklásnak kellhet, hogy meg tudunk adni egy $\sigma$ permutációt, ami ezt előállítja, majd a végén alkalmazni tudjuk $\sigma^{-1}$-t a tulajdonságok sérülése nélkül.}
-% TODO: levezetés, hogy miért nem sérülnek a tulajdonságok?
+\emph{Ötlet:} Fejezzük ki $x$-et az $f(x) = y$ egyenlőségből:
+\begin{equation}\label{eq:loc-inv-starter}
+f(x) = y \eqv y - f(x) = 0 \eqv y + \underbrace{x - f(x)}_{=:\,h(x)} = x \eqv y + h(x) = x
+\end{equation}
 
-Szedjük szét a felbontás szerint $c$-t is, $c = (a,b)$ komponensekre. Ekkor $\partial_2 g(a,b) = A$, amiről tudjuk, hogy invertálható, vagyis $\det \partial_2 g(a,b) \ne 0$ következik. Továbbá $c \in \{g=0\}$ miatt $g(a,b) = 0$, így alkalmazhatjuk az implicitfüggvény-tételt.
+Itt $h \in C^1$, mivel $f \in C^1$.
 
-Ekkor alkalmas $K(a) \subset \R^{n-m},\ K(b) \subset \R^m$ környezetekkel létezik $g$ által az $(a,b)$ körül meghatározott $h : K(a) \to K(b)$ implicitfüggvény, amire $h \in C^1$ és
-$$h'(x) = -\Big(\partial_2g(x,h(x))\Big)^{-1} \cdot \partial_1g(x,h(x)) \quad (x \in K(a))$$
-
-Világos\footnote{
-Annyira nem, tekintve hogy ez az állítás egyáltalán nem tartja tiszteletben a fenti permutációnkat, de nem aggódunk túlságosan emiatt, mivel a könyv se aggódott túlságosan emiatt.
-}, hogy ha a $\{g=0\}$ halmazt leszűkítjük ezekre a környezetekre, akkor
-$$\big(K(a) \times K(b)\big)\cap \{g=0\} = \{(x,\,h(x)) \in U : x \in K(a)\}$$
-
-Mivel $c$ feltételes lokális szélsőértéke $f$-nek $g=0$-ra nézve, így $f(\xi) \le f(c) \enspace (\xi \in K(c) \cap \{g=0\})$.\footnote{
-Itt most feltettük, hogy $f(c)$ feltételes lokális maximum. Minimumra természetesen ezzel analóg módon történik a levezetés.
+Rögzítsünk egy $y \in \R^n$ vektort, válasszuk $r > 0$-t úgy, hogy $\overline{K_r(0)} \subset \dom_f$, és definiáljuk továbbá a $F_y(x) := y + h (x) \quad (x \in \overline{K_r(0)})$ függvényt.\footnote{
+Megjegyezzük, hogy a \eqref{eq:loc-inv-starter} ekvivalencia alapján egy tetszőleges $y \in \R^n$ vektorra pontosan akkor fog teljesülni $f(x) = y$, ha $F_y(x) = x$. Innen jön az ötlet, hogy induljunk el az $F_y(x)$-en vett fixpont-tétel felé, ami majd megadja ezt az $x$-et.
 }
 
-Feltehető $K(a) \times K(b) \subset K(c)$.
+Ekkor a feltevésekből következően
+$$h'(0) = \text{id}'(0) - f'(0) = I - I = (0)_{i,j=1}^n =: \Theta \in \R^{n \times n},$$
+azaz az $n \times n$-es nullmátrix.
 
-Definiáljuk a $\Phi(x) := f(x,\, h(x)) \enspace (x \in K(a))$ függvényt, amire $\Phi(x) \le f(c) = \Phi(a)$ teljesül, bármely $x \in K(a)$ mellett. Tehát $\Phi$-nek lokális maximuma van $a$-ban. 
+Feltehető továbbá, hogy $\forall x \in \overline{K_r(0)} : \norm {h'(x)}_\infty \le \dfrac 12$.
 
-Mivel $\Phi \in D(K(a))$ is teljesül, így
-$$\Phi'(a) = \grad \Phi(a) = 0$$
+Ezt megtehetjük, mivel $h \in C^1$ és $h'(0) = \Theta$ garantálják, hogy lesz $0$-nak környezete, ahol ``elég kicsit'' mozdultak csak el ehhez a parciális deriváltak. A korábbi $\overline{K_r(0)} \subset \dom_f$ kikötésünk pedig ezzel összeegyeztethető, mivel $0 \in \intp \dom_f$.
 
-Vezessük be a $\varphi(x) := (x, h(x)) \enspace (x \in K(a))$ függvényt, amivel $\Phi = f \circ \varphi$. Teljesül továbbá $\varphi \in D$, valamint ha $I$ az $\R^{(n-m)\times(n-m)}$ egységmátrixot jelöli, akkor
-$$\varphi'(x) = \begin{bmatrix}I \\ h'(x)\end{bmatrix} \in \R^{n\times(n-m)}\qquad (x \in K(a))$$
+Ebből következően\footnote{
+A $(*)$-al jelölt lépéséhez a Lagrange-féle középérték-egyenlőtlenséget alkalmazzuk. \\
+\href{https://en.wikipedia.org/wiki/Mean_value_theorem\#Mean_value_inequality}{Wikipédia: Mean Value Theorem}
+}
+\begin{gather}
+\forall x,z \in \overline{K_r(0)} : \norm {F_y(x)-F_y(z)}_\infty = \norm {y - h(x) - y + h(z)}_\infty = \notag \\
+= \norm {h(x)-h(z)}_\infty \stackrel{(*)}\le \sup\{\norm{h'(\xi)}_\infty : \xi \in \overline{K_r(0)}\} \cdot \norm{x - z}_\infty
+\le \dfrac 12 \cdot \norm{x-z}_\infty \label{eq:loc-inv-F-approx}
+\end{gather}
 
-A fentiek, és az összetett függvények deriváltja tétel alapján,
-
+Becsüljük $F_y(x)$ függvényérték $\infty$-norma szerint vett hosszát:
 \begin{gather*}
-    0 = \Phi'(a) = f'(\varphi(a)) \cdot \varphi'(a) = f'(a,h(a)) \cdot \begin{bmatrix}I \\ h'(a)\end{bmatrix} = f'(c) \cdot \begin{bmatrix}I \\ h'(a)\end{bmatrix} = \\
-    \partial_1f(c) + \partial_2f(c)\cdot h'(a) = \partial_1f(c) - \partial_2f(c) \cdot \big(\partial_2g(c)\big)^{-1}
-\cdot \partial_1g(c)\end{gather*}
+\norm{F_y(x)}_\infty = \norm{y + h(x)}_\infty = \lVert{y + h(x) - \underbrace{h(0)}_{=\,0}}\rVert_\infty \le \norm y_\infty + \norm{h(x)-h(0)}_\infty \\
+\implies \text{ld. }\eqref{eq:loc-inv-F-approx} \implies \norm{F_y(x)}_\infty \le \norm{y}_\infty + \frac 12\norm{x}_\infty \le \norm y_\infty + \frac r2
+\end{gather*}
 
-Ekkor legyen $\lambda := -\partial_2f(c)\cdot\big(\partial_2g(c)\big)^{-1} \in \R^m$, ezzel $0 = \partial_1 f(c) + \lambda\cdot\partial_1g(c)$.
+Tehát $y \in K_{r/2}(0)$ választással,
+\begin{equation}\label{eq:loc-inv-Fy-rng}
+\norm{F_y(x)}_\infty < r \quad \text{és így} \quad F_y : \overline{K_r(0)} \to K_r(0).
+\end{equation}
 
-Továbbá $\big(\partial_2g(c)\big)^{-1}$-el ``átszorozva'' kapjuk, hogy: $\partial_2f(c) + \lambda \cdot \partial_2g(c) = 0$.
+Vegyük a $\varrho(x,y) := \norm{x -y}_\infty ( = \varrho_\infty(x,y))$ metrikát. Ekkor a $(\overline{K_r(0)},\varrho)$ metrikus tér teljes\footnote{
+Ld. \emph{Analízis III., $p$-normák teljessége zárt intervallumon}. Ehhez a megállapításhoz volt fontos, hogy a környezetünk zárt legyen, ugyanis $(K_r(0),\,\varrho_\infty)$ metrikus tér nem lenne teljes.}\,\footnote{
+Itt az, hogy a norma által indukált metrikával kapott metrikus térre kimondtuk hogy teljes, ekvivalens azzal, hogy a $(\overline{K_r(0)}, \norm{.}_\infty)$ normált tér egy \emph{Banach-tér}.}.
 
-Ebből a $\partial_1$ és $\partial_2$ tagokat kibontva kapjuk a következő egyenlőségeket:
-\begin{align*}
-\partial_{i_k}f(c) + \sum_{l=1}^m \lambda_l\cdot\partial_{i_k}g_l(c) &= 0 \quad (k=1,\ldots,n-m) \\
-\partial_{j_k}f(c) + \sum_{l=1}^m \lambda_l \cdot \partial_{j_k}g_l(c) &= 0 \quad (k=1,\ldots,m)
-\end{align*}
+A \eqref{eq:loc-inv-F-approx} egyenlőtlenségben kapott becsléssel azt is beláttuk, hogy $F_y$ egy kontrakció, $q = 0.5$ kontrakciós együtthatóval. Továbbá $K_r(0) \subset \overline{K_r(0)}$ és a \eqref{eq:loc-inv-Fy-rng}-ben tett megállapításunk alapján alkalmazhatjuk $F_y$-ra a \emph{fixpont-tételt}.
 
-Ezeket összevonva pedig:
-$$\partial_k f(c) + \sum_{l=1}^m \lambda_l \cdot \partial_kg_l(c) = 0 \quad (k = 1,\ldots,n)$$
+Vagyis
+\begin{equation*}
+    \forall y \in K_{r/2}(0) : \exists! x_y \in \overline{K_r(0)} : F_y(x_y) = x_y
+\end{equation*}
 
-Tehát $\displaystyle \grad (f + \lambda g)(c) = \left( \partial_1f(c) + \sum_{l=1}^m \lambda_l \cdot \partial_1g_l(c), \ldots, \partial_n f(c) + \sum_{l=1}^m \lambda_l \cdot \partial_n g_l(c) \right) = 0$. \qed
+Ez alapján definiáljunk egy $\varphi : K_{r/2}(0) \to \overline{K_r(0)}$ leképezést, amire $\varphi(y) := x_y \enspace (y \in K_{r/2}(0))$\footnote{
+Itt van egy minimális eltérés az előadástól, ott ugyanis pár állítást a következőkből még $x_y$-al fogalmazunk meg, aztán vezetjük csak be a $\varphi$ függvényt (valamint ott $\varphi$ helyett $\varrho$-val jelöltük ezt a függvényt). A két módszer természetesen ekvivalens, és a segédanyagban is az itt látható azonnali áttérés található.
+}.
+Erre minden $y \in K_{r/2}(0)$ mellett teljesül, hogy $F_y(\varphi(y)) = \varphi(y)$, tehát
+\begin{equation*}
+    F_y(\varphi(y)) = y + \varphi(y) - f(\varphi(y)) = y + h(\varphi(y)) = \varphi(y)
+\end{equation*}
+
+Továbbá a $h(x) = x - f(x)$ definíció alapján,
+\begin{equation*}
+    y + \varphi(y) - f(\varphi(y)) = \varphi(y) \implies f(\varphi(y)) = y
+\end{equation*}
+
+Felhasználva a \eqref{eq:loc-inv-Fy-rng} korlátunkat, megállapítjuk, hogy
+\begin{equation*}
+    \norm{\varphi(y)}_\infty = \norm{F_y(\varphi(y))}_\infty < r \quad \text{és így} \quad \varphi : K_{r/2}(0) \to K_r(0)
+\end{equation*}
+
+Belátható továbbá\footnote{
+    Ezt az előadás és a segédanyag se részletezte. Nem feltétlen bonyolult, kihozható például a középérték-egyenlőtlenségből és a bi-Lipschitz tulajdonságból. Viszont ez megint új sugarak, korlátok és tételek behozását igényelné, ezért itt se bonyolítom a bizonyítást vele. Egy kicsit bonyolultabb módszer megtalálható a könyvben is.\\
+    \href{https://en.wikipedia.org/wiki/Lipschitz_continuity\#Definitions}{Wikipédia: Bi-Lipschitz tulajdonság (a \emph{Definitions} szekció végén található)} % TODO: bevanal2-ből kiírni függelékbe
+}, hogy $\rng_\varphi$ nyílt, és valamilyen $S := K(0) \subset \rng_\varphi \subset \overline{K_r(0)}$ környezettel véve az $\restrict f S$ leszűkítés injektív. Tehát $f$ lokálisan invertálható a $0$ pontban és a lokális inverze a $\varphi$ függvény $\rng_{\restrict f S}$ halmazra vett leszűkítése lesz. \partqed
+
+{ % group introduced for \ty = \tilde y shortcut
+\newcommand{\ty}{\tilde y}
+
+Következő lépésnek vizsgáljuk $\varphi$ folytonosságát. Legyenek $y, \ty \in K_{r/2}(0)$, ekkor
+\begin{gather*}
+    \norm{\varphi(y) - \varphi(\ty)}_\infty = \norm{x_y - x_{\ty}}_\infty = \norm{F_y(x_y) - F_{\ty}(x_{\ty})}_\infty = \\
+    = \norm{y + h(\varphi(y)) - \ty - h(\varphi(\ty))}_\infty \le \norm{y - \ty}_\infty + \norm{h(\varphi(y)) - h(\varphi(\ty))}_\infty
+\end{gather*}
+
+Továbbá mivel $h$ egy kontrakció (ld. \eqref{eq:loc-inv-F-approx} korlát),
+\begin{gather*}
+    \norm{\varphi(y)-\varphi(\ty)}_\infty \le
+    \norm{y - \ty}_\infty + \norm{h(\varphi(y)) - h(\varphi(\ty))}_\infty \le \norm{y - \ty}_\infty + \frac 12 \norm{\varphi(y) - \varphi(\ty)}_\infty \\
+    \implies \norm{\varphi(y) - \varphi(\ty)}_\infty \le 2 \norm{y - \ty}_\infty 
+\end{gather*}
+
+Tehát teljesül $\varphi \in C\big(K_{r/2}(0)\big)$ is. A korábbi leszűkítést nézve mivel $\rng_{\restrict f S} \subset K_{r/2}(0)$, ezért spec. a $\left(\restrict f S \right)^{-1} = \restrict \varphi {\rng_{\restrict f S}}$ lokális inverz folytonos lesz az egész értelmezési tartományán. \partqed
+}
+
+\newpage
+
+Vizsgáljuk meg végül a lokális inverzet differenciálás szempontjából.
+
+Vezessük be a $g$ függvényt a következő módon:
+$$g \in \R^n \times \R^n \to \R^n : g(u,v) := f(v) - u \quad (u \in \R^n,\, v \in \dom_f)$$
+
+Ekkor $g \in C^1$ (mivel $f \in C^1$), $g(b,a) = f(a) - b = 0$. A deriváltjára pedig
+$$\grad g(u,v) = \begin{bmatrix}-I & f'(v)\end{bmatrix}$$
+
+Vagyis spec. $\partial_2 g(b,a) = f'(a) = f'(0) = I$ nem szinguláris. Mivel ezek a feltételek mind teljesülnek, alkalmazhatjuk az \emph{implicitfüggvény-tételt}.
+
+Tehát $\exists \psi : U \to V$ függvény, ami $g(u,v)$ által a $(0,0)$ körül meghatározott implicitfüggvény, azaz $\forall u \in U : g(u,\, \psi(u)) = 0$ (ahol $U, V$ alkalmas sugarú környezetei $0$-nak).
+
+Továbbá $\psi \in C^1$ és $\psi'(u) = -\partial_2g(u,\, \psi(u))^{-1} \cdot \partial_1 g(u,\, \psi(u)) \enspace (u \in U)$.
+
+Ebből nekünk az utolsó tulajdonság lesz hasznos, mivel
+\begin{equation*}
+    \psi'(x) = -\partial_2g(x,\, \psi(x))^{-1} \cdot \partial_1 g(x,\, \psi(x)) = -\big(f'(\psi(x))\big)^{-1} \cdot -I = \big(f'(\psi(x))\big)^{-1} \quad (x \in U)
+\end{equation*}
+
+Ha behelyettesítjük $\psi$-t a $g$ függvénybe, akkor $g(x,\,\psi(x)) = f(\psi(x)) - x = 0 \enspace (x \in U)$. Tehát minden $x \in U$ esetén $f(\psi(x)) = x$. Továbbá minden $x \in U$ értékhez a $\psi(x) =: y \in V$ az egyetlen olyan $y$, amivel $g(x,y) = 0$.
+
+A korábbiakból tudjuk, hogy $f$-nek létezik lokális inverze a $0$-ban, ez a $\varphi$ függvény. Tudjuk továbbá, hogy $\dom_\varphi$ nyílt, vagyis $U \subset \dom_\varphi$ feltehető.
+
+Mivel $f(\varphi(x)) = x$ is teljesül minden $x \in U$-re, ezért $\psi(x) = \varphi(x) \enspace (x \in U)$.
+
+Továbbá mivel tudjuk, hogy $\psi \in C^1$ és $U \subset \dom_{\varphi}$, ezért
+\begin{equation*}
+    \forall x \in U : \psi \in D\{x\} \implies \varphi \in D\{x\} \text{ és } \varphi'(x) = \psi'(x) = \big(f'(\varphi(x))\big)^{-1}
+\end{equation*}
+
+Tehát azt is beláttuk, hogy $\varphi \in C^1$ és $\varphi'(x) = \big(f'(\varphi(x))\big)^{-1}$. \qed
+
+\subsection{Inverz- és implicitfüggvény-tétel kapcsolata}
+
+Az \emph{ImpFT} (implicitfüggvény-tétel) és az \emph{InvFT} (inverzfüggvény-tétel)  bizonyítása nagyon szoros kapcsolatban áll egymással. Az egyik oldalt láttuk is, amikor az InvFT bizonyításának utolsó részéhez felhasználtuk az ImpFT-t. Ami ezekből viszont nem látszik, hogy a másik irányba is egy hasonlóan szoros kapcsolat található.
+
+Felmerülhet például a kérdés, hogy nem lett-e volna könnyebb az InvFT bizonyításban, ha már sokkal korábban behozzuk a $\psi$ implicitfüggvényt (amiről később belátjuk, hogy a lokális inverzzel megegyezik), és az első két állítást is ennek segítségével látjuk be. A rövid válasz az, hogy \emph{de, ugyanis az implicitfüggvény-tétel segítségével minden fenti tulajdonság (kb.) triviálisan megadható.} Valamint azt se lenne túl bonyolult belátni, hogy a kapott implicitfüggvény a lokális inverz kritériumainak megfelel (mi is megtettük a bizonyítás során).
+
+A probléma azzal van, hogy az ImpFT bizonyításához szükségünk van az InvFT egy gyengébb verziójára, mint lemma. Ez a lemma az, amit az első két részében beláttunk a bizonyításnak (szándékosan az ImpFT használata nélkül). Ez kimondja a lokális invertálhatóságot, a lokális inverz létezését, és annak folytonosságát (de \emph{nem} a folytonos differenciálhatóságot). Ez felhasználható utána az implicitfüggvény létezésének és folytonosságának belátásához az ImpFT bizonyítása során. Ezután a gyengített InvFT-től ``függetlenül'' belátható az implicitfüggvény folytonos differenciálhatósága és deriváltjának alakja is. Fogva a teljes ImpFT-t, utána visszajöhetünk a gyengített InvFT bizonyításunkhoz, és beláthatjuk $C^1$-et, valamint a derivált alakját (ahogy mi is tettük a fenti bizonyításban).
