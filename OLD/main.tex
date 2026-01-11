@@ -38,9 +38,6 @@
     linktoc=all
 }
 
-\newcommand\chapref[1]{\hyperref[#1]{\ref*{#1}. vizsgatétel}}
-\newcommand\secref[1]{\hyperref[#1]{\ref*{#1}. szekció}}
-
 \MakePerPage{footnote}
 
 \newcommand{\defaultparindent}{\setlength\parindent{0pt}}
@@ -60,19 +57,14 @@
 \newtheorem*{remark}{Megjegyzés}
 \newtheorem*{remarks}{Megjegyzések}
 
+
 \theoremstyle{plain}
 \newtheorem{theorem}{Tétel}[chapter]
 \newtheorem*{theorem*}{Tétel}
 \newtheorem{statement}{Állítás}[chapter]
 \newtheorem*{statement*}{Állítás}
-\newtheorem{lemma}{Lemma}[chapter]
-\newtheorem*{lemma*}{Lemma}
 
-\theoremstyle{definition}
-\newtheorem{definition}{Definíció}[chapter]
-\newtheorem*{definition*}{Definíció}
-
-\title{Analízis alkalmazásai vizsgatételek\\(work in progress)}
+\title{Analízis alkalmazásai jegyzet\\(work in progress)}
 \author{Szűcs Gergely}
 \date{Utoljára frissítve: \today}
 
@@ -84,8 +76,6 @@
 \setcounter{tocdepth}{1}
 \tableofcontents
 
-\include{intro}
-
 \begingroup
 \titleformat{\chapter}[display]{\normalfont\huge\bfseries}{\thechapter. tétel}{1em}{}{}
 
@@ -93,7 +83,7 @@
 \include{topics/tetel2}
 \include{topics/tetel3}
 \include{topics/tetel4}
-% \include{topics/tetel5}
+\include{topics/tetel5}
 % \include{topics/tetel6}
 % \include{topics/tetel7}
 % \include{topics/tetel8}
@@ -110,9 +100,31 @@
 
 \appendix
 
-\chapter{Kiegészítő bizonyítások}
+\chapter{``Triviális'' levezetések gyűjteménye}\label{appendix:a}
+\setcounter{footnote}{0}
 
-\input{appendix/loc-inv-cond}
-\input{appendix/szep-kep-uni-proof}
+Az \ref{appendix:a} függelékben olyan levezetések találhatóak, amik meggondolására az előadáson nem volt idő, vagy amik házi feladat címszóval lettek a hallgatóság elé bocsájtva. Ezeknek igyekeztem egy valódi részhalmazát itt kidolgozni. Főleg olyan levezetések és lépések kerülnek itt boncolásra, amik számomra nem voltak elsőre átláthatóak, bármennyire is triviálisak.
+
+\input{appendix_a/cond}
+\include{appendix_a/loc-inv}
+
+\chapter{Csemege-bizonyítások tárháza}\label{appendix:b}
+\setcounter{footnote}{0}
+
+A \ref{appendix:b} függelékben olyan bizonyítások kerülnek kifejtésre, amelyek alapvetően nem képezik a vizsgakövetelmények részét, azonban hasznosak vagy érdekesek lehetnek tanulás szempontjából. Találhatók olyan tételek, amiknek bár a bizonyítása nem kell számonkérésen, a tételkimondás igen (ezeknél a kimondások megtalálhatóak a jegyzet törzsében is), illetve olyan bizonyítások amik segítik az adott anyagrész elmélyítését.
+
+Elméletileg semmi olyat nem tartalmaz a függelék, ami önmagában vizsgán elvárás lenne.
+% TODO: IFT proof
+
+\input{appendix_b/exact-uni-proof}
+\input{appendix_b/sep-exact-transform}
+
+\begin{comment}
+\chapter{Bizonyítástervek}\label{appendix:c}
+
+A \ref{appendix:c} függelékben rövid vázlatok találhatók az egyes vizsgakövetelményben szereplő bizonyítások mellé. Ez hasznos lehet hosszabb bizonyítások struktúrájának rögzítéséhez, illetve gyakorláshoz. Mivel a jegyzetben és előadásokon a ``bizonyítás vázlata'' kifejezés alatt egy egész konkrét, ettől eltérő dolgot értünk, a bizonyításterv szó utal a jegyzet során az itt található vázlatokra.
+\end{comment}
+
+% TODO
 
 \end{document}

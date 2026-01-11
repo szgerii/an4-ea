@@ -1,7 +1,26 @@
-% id(x) = x (x \in \R^n) bevezetése
-% függelék magyarázat
-% * tételek magyarázata
-% \partqed
-% könyv, segédanyag def.
-% IFT, ImpFT, InvFT
-% 1-2 tételek felcserélése magyarázat
+\chapter*{Bevezetés}
+\label{chap:intro}
+\addcontentsline{toc}{chapter}{\nameref{chap:intro}}
+
+\section*{Előszó}
+
+A jegyzet az Eötvös Loránd Tudományegyetem Informatikai Kar programtervező informatikus BSc szakán oktatott \emph{Analízis alkalmazásai} tárgy vizsgatételeit igyekszik kifejteni a 2025/2. félév tematikája\footnote{Elérhető (2026. 01. 10.): \href{https://numanal-old.inf.elte.hu/~simon/analalk.pdf}{https://numanal-old.inf.elte.hu/~simon/analalk.pdf}} alapján.
+
+Az anyagot nagy részben Dr. Simon Péter \emph{Bevezetés az analízisbe II.} könyve\footnote{Elérhető a szerző honlapján: \href{https://numanal-old.inf.elte.hu/~simon/Analizis\%202.pdf}{https://numanal-old.inf.elte.hu/~simon/Analizis\%202.pdf}} és a tárgyhoz készített segédanyag\footnote{Elérhető a szerző honlapján: \href{https://numanal-old.inf.elte.hu/~simon/egybefuzottea.pdf}{https://numanal-old.inf.elte.hu/~simon/egybefuzottea.pdf}} alapján dolgoztam ki. A jegyzet során a korábbira \emph{könyv} címszóval, az utóbbira \emph{segédanyag} címszóval hivatkozok. A fenti forrásokhoz társult még saját, illetve másoktól összeszedett előadás jegyzet is, azonban a jelölések (főleg a bizonyítások során használt elnevezések) szempontjából próbáltam a könyvhöz és a segédanyaghoz igazodni.
+
+Mivel a jegyzet a vizsgatematika alapján készült, ezért a szerkezetét a szóbeli tételek által elvárt fogalmak, tételek és bizonyítások adják, vagyis nem fedi le az egész féléves anyagot. Ettől függetlenül természetesen egy olyan kidolgozás megírása volt a cél, ami elejétől a végéig olvasható és megtanulható, más jegyzetek konzultálása nélkül is. A korábbi tárgyakon felvezetett fogalmakra és tételekre persze ez nem vonatkozik, de ahol kifejezetten fontos a megértéshez, ott szerepelhetnek egy emlékeztető címszó mellett. Emlékeztetőként szerepelhetnek továbbá olyan definíciók és tételek is, amik a tematikában korábban szereplő vizsgatételek során lettek bevezetve.
+
+A tételek mindig egy \emph{Követelmény} szekcióval kezdődnek, ahol megtalálhatóak a tematikában megfogalmazott pontos elvárások. Azok a tételek, amiknek a címe előtt egy * karakter található felelnek meg a tematikában keretezett sorszámmal jelölt tételeknek, vagyis amikből legalább egyet kap mindenki (részletekért lásd a tematikát).
+
+\bigskip
+\hfill \emph{Szűcs Gergely, 2026}
+
+\section*{Jelölések}
+
+A jegyzet használ pár nem feltétlen megszokott matematikai jelölést, ezek magyarázata itt található:
+
+$\Diamond$: A gyémánt szimbólum olyan pontokat jelöl a bizonyításban, ahol az állítás egy önálló része bizonyításra került. Ez összetett tételeknél játszik szerepet, azaz ha például egy tétel állítása $A \land B \land C$ részállításokból épül fel, és ezeket sorra külön-külön bizonyítjuk, akkor kettő $\Diamond$ fog szerepelni rendre $A$ és $B$ belátása után, és végül egy $\blacksquare$ szimbólummal zárul a teljes bizonyítás.
+
+$A \dimplies B$: $A$ definíciójából (pl. axiómák vagy feltétel alapján) egyenesen következik $B$. Ez persze csupán extra támpontot próbál adni az értelmezés során, gyakorlatban megegyezik a sima $A \implies B$ jelöléssel.
+
+$A \stackrel{\triangle}{\le} B$: A háromszög-egyenlőtlenség alapján következik, hogy $A \le B$.

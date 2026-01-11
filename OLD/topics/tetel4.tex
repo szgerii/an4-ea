@@ -11,7 +11,8 @@
 
 \section{Lineáris differenciálegyenletek és homogenitásuk}
 
-\begin{definition}[lineáris differenciálegyenlet]
+\subsection{Definíció}
+
 Vegyük a következő differenciálegyenlet esetet:
 
 Legyen $n := 1, I \subset \R$ nyílt, $\Omega := \R$, $g,h : I \to \R$, amikre $g,h \in C$. Továbbá $f : I \times \R \to \R$ és $f(x,y) := g(x)y + h(x) \quad (x \in I, y \in \R)$.
@@ -24,12 +25,8 @@ Ekkor egy olyan $\varphi : I \to \R$ megoldást keresünk, amire $\dom_\varphi$ 
 Ezt a feladatot \textbf{lineáris differenciálegyenletnek} nevezzük.\footnote{Szokás néha csak a \eqref{eq:lin-de-cond} egyenlőséget magában is így hívni.}
 
 Adott $\tau \in I,\ \xi \in \R$-re a $\tau \in \dom_\varphi,\ \varphi(\tau) = \xi$ feltételekkel kiegészítve pedig \emph{lineáris differenciálegyenletre vonatkozó kezdetiérték-problémának}.
-\end{definition}
 
-\subsection{Homogén lineáris differenciálegyenletek}\label{sec:hom-lin-de}
-
-\begin{definition}[lineáris d.e.-k homogenitása]
-\
+\subsection{Homogén lineáris differenciálegyenlet}\label{sec:hom-lin-de}
 
 Egy lineáris differenciálegyenlet \textbf{homogén}, ha $h \equiv 0$, illetve \textbf{inhomogén}, ha $h \not \equiv 0$.
 
@@ -40,7 +37,6 @@ Előadáson az $\M_0$ jelölés szerepelt, a könyv és segédanyag viszont $\M_
 \M := \{\varphi : I \to \R \mid \varphi \in D \land \varphi' = g\cdot \varphi + h\} \notag \\
 \M_0 := \M_h := \{\varphi : I \to \R \mid \varphi \in D \land \varphi' = g\cdot \varphi\}\label{eq:lin-m0-def}
 \end{gather}
-\end{definition}
 
 \bigskip
 
@@ -50,7 +46,7 @@ $$\varphi_0'(x) = G'(x)\cdot e^{G(x)} = g(x) \cdot \varphi_0(x)$$
 
 Tehát $\varphi_0 \in \M_0$, mivel eleget tesz a \eqref{eq:lin-m0-def} feltételeinek.
 
-\begin{theorem}[homogén megoldások szerkezete]\label{sec:hom-mo}
+\begin{theorem}[Homogén megoldások szerkezete]\label{sec:hom-mo}
 \
 
 Az $\M_0$ halmaz előállítható $\varphi_0$-ból a következő módon:
@@ -70,14 +66,16 @@ Be kell még látni, hogy \emph{csak} ilyen függvények kerülhetnek $\M_0$-ba.
 Ekkor $\dfrac {\chi} {\varphi_0}$ differenciálható, mivel $\xi \in D, \varphi_0 \in D$ és $\varphi_0(x) \ne 0 \enspace (x \in \dom_{\varphi_0})$, ezért
 $$\left(\frac \chi {\varphi_0}\right)' = \frac {\chi'\cdot \varphi_0 - \chi \cdot \varphi'_0} {\varphi_0^2} = \frac{g\cdot \chi \cdot \varphi_0 - \chi \cdot g \cdot \varphi_0}{\varphi_0^2} \equiv 0$$
 
-Tehát mivel $\dfrac \chi {\varphi_0}$ függvény deriváltja az azonosan $0$ függvény, így $\exists c \in \R : \dfrac \chi {\varphi_0} = c$.
+Tehát mivel $\dfrac \chi {\varphi_0}$ függvény deriváltja azonosan $0$, így $\exists c \in \R : \dfrac \chi {\varphi_0} = c$.
 
 Ekkor $\chi = c \cdot \varphi_0$, vagyis minden $\M_0$-beli tag felírható $(c \cdot \varphi_0)$ alakban valamilyen $c \in \R$-el.
 \end{proof}
 
 \section{Inhomogén eset, partikuláris megoldás}
 
-\begin{theorem}[állandók variálásának a módszere]\label{thm:voc}
+\subsection{Állandók variálásának a módszere}
+
+\begin{theorem}[Állandók variálásának a módszere]\label{thm:voc}
 \
 
 Bármely lineáris differenciálegyenlethez megadható olyan $m$ differenciálható függvény, amivel az $m \cdot \varphi_0$ függvény megoldás lesz, azaz
@@ -106,6 +104,8 @@ m' &= \frac h {\varphi_0}
 Vagyis $m \cdot \varphi_0 \in \M$ állítással ekvivalens, hogy egyrészt $(m \cdot \varphi_0) \in D$, ami biztosan teljesül, mivel $m, \varphi_0 \in D$, másrészt a $\dfrac h {\varphi_0}$ függvénynek van primitív függvénye, ami szintén teljesül, mivel $h,\varphi_0 \in C$ és tetszőleges $x \in \dom_{\varphi_0}$-re $\varphi_0(x) \ne 0$ teljesül.
 \end{proof}
 
+\subsection{Partikuláris megoldás}
+
 \begin{statement}
 \
 
@@ -130,29 +130,20 @@ Speciálisan a \ref{thm:voc} tételben látott $\tilde\varphi := \psi = m \cdot 
 \M = \{\psi + c \cdot \varphi_0 \mid c\in \R\}
 \end{equation}
 
-\begin{theorem}[lineáris k.é.p. megoldhatósága]
-\
+\subsection{Kezdetiérték-probléma egyértelműsége}
 
-Minden lineáris differenciálegyenletre vonatkozó kezdetiérték-probléma megoldható, és minden $\varphi, \psi$ megoldásaira:
-\[
-\varphi(t) = \psi(t) \quad (t \in \dom_\varphi \cap \dom_\psi)
-\]
-\end{theorem}
-\begin{proof}
-    TODO (fenti bizonyítások nagyrészt kiadják, csak össze kell őket ``fűzni'')
-\end{proof}
+Minden lineáris differenciálegyenletre vonatkozó kezdetiérték-probléma \emph{egyértelműen} megoldható.
 
 \section{Radioaktív bomlás}
 
 \subsection{Feladat}
 
-Képzeljük el egy radioaktív anyag bomlását. A bomlási sebesség egyenesen arányos a még fel nem bomlott anyag mennyiségével.
-
+Képzeljük el egy (pl. radioaktív) anyag bomlását. A bomlási sebesség egyenesen arányos a még fel nem bomlott anyag mennyiségével.
 \emph{A bomlás kezdetétől nézve mikor ``feleződik meg'' az anyag (azaz bomlik el a fele)?}
 
 Adott tehát egy $m \in \R \to \R$ tömeg-idő függvény egy $\R \ni m_0 \ne 0$ kezdeti tömeggel ($m(0) = m_0$), és tegyük fel, hogy $m \in D$. Továbbá a feladat alapján ekkor
 \begin{equation}\label{eq:rad-boml-de}
-m'(x) = -\alpha \cdot m(x) \qquad (0 < \alpha \in \R,\ x \in \dom_m)
+m'(x) = -\alpha \cdot m(x) \qquad (\R \ni \alpha > 0,\ x \in \dom_m)
 \end{equation}
 
 \subsection{Megoldás}
@@ -174,5 +165,5 @@ Valamint a kezdetiérték-feltétel miatt:
 Keressük ekkor azt a $T \in \dom_m$-t, amire $m(T) = \dfrac {m_0} 2$, vagyis
 \begin{gather*}
 m(T) = \frac {m_0} 2 = m_0 \cdot e^{-\alpha T} \implies e^{-\alpha T} =  \frac 12 
-\implies T = \frac {\ln 2} \alpha
+\implies \boxed {T = \frac {\ln 2} \alpha}
 \end{gather*}

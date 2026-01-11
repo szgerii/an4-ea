@@ -1,4 +1,4 @@
-\chapter{*Feltételes szélsőérték}\label{chap:tetel2}
+\chapter{*Feltételes szélsőérték}
 
 \section{Követelmények}
 \begin{enumerate}
@@ -11,22 +11,21 @@
 
 Ez a szekció (\ref{sec:loc-extr-reminder}) kizárólag ismétlésként szerepel, nem képezi a tárgyi tananyag részét.
 
-\begin{definition}[lokális szélsőérték]
+\subsection{Definíció}
 
 Legyen $1 \le n \in \N$ és $f \in \R^n \to \R$.
 
 Ekkor $f$-nek az $a \in \dom_f$ helyen \textbf{lokális maximuma (minimuma)} van, azaz az $a$ pont egy \textbf{lokális maximumhely (minimumhely)}, ha:
 
-$\exists r >0 : K_r(a) = \{x \in \R^n : \norm{x-a}_2 < r\}$ amire $f(x) \le f(a) \quad (x \in K_r(a) \cap \dom_f)$.
+$\exists K(a) = K_r(a) = \{x \in \R^n : \norm{x-a}_2 < r\}\quad (r > 0)$ amire $f(x) \le f(a) \quad (x \in K(a) \cap \dom_f)$.
 
 Lokális minimum esetén pedig $f(x) \ge f(a)$.
 
 Ekkor $f(a)$ az $f$ \textbf{lokális maximuma (minimuma)}.
 
 Általánosan pedig $f$-nek az $a$-ban \textbf{lokális szélsőértéke} van, azaz az $a$ pont egy \textbf{lokális szélsőértékhelye} $f$-nek, ha $f$-nek $a$-ban lokális maximuma vagy lokális minimuma van.
-\end{definition}
 
-\begin{definition}[kvadratikus alak]
+\subsection{Kvadratikus alak}
 
 Legyen $n \in \N$ és $A \in \R^{n\times n}$ szimmetrikus.
 
@@ -34,12 +33,14 @@ Ekkor az $A$ mátrix által meghatározott \textbf{kvadratikus alak}:
 
 $Q \in \R^n \to \R,\ Q(x) = \dprod{Ax,\,x}\quad (x \in \R^n)$.
 
-Egy $f \in D^2\{a\}$ függvényhez az $a$-beli Hesse-mátrixból kapott kvadratikus alakot $Q_a^f$-el jelöljük:
+\subsubsection{Egy pontban kétszer differenciálható függvények}
+
+Egy $f \in D^2\{a\}$ függvényhez az $a$-beli Hesse-mátrixból kapott kvadratikus alakot $Q_a^f$-el jelöljük, azaz:
 
 $\displaystyle Q_a^f(x) := \dprod{f''(a)x,\,x} = \sum_{i=1}^n\sum_{j=1}^n\partial_{ij}f(a)x_ix_j \quad (x \in \R^n)$
-\end{definition}
 
-\begin{definition}[definitség]
+\subsubsection{Definitség}
+
 Egy $Q$ kvadratikus alak
 
 \begin{enumerate}[label=(\alph*),itemsep=2pt,topsep=2pt]
@@ -49,9 +50,8 @@ Egy $Q$ kvadratikus alak
     \item negatív szemidefinit, ha $Q(x) \le 0 \quad (x \in \R^n)$
     \item indefinit, ha $\exists x,y \in \R^n : Q(x) < 0 < Q(y)$
 \end{enumerate}
-\end{definition}
 
-\subsection{``Közönséges'' szélsőérték feltételek}
+\subsection{Feltételek}
 
 \subsubsection{Elsőrendű szükséges feltétel}
 
@@ -82,11 +82,11 @@ Legyen $f \in \R^n \to \R$ és tfh. egy $a \in \intp \dom_f$ pontban:
 
 Ekkor $\grad f(a) = 0$ és $Q_a^f$ kvadratikus alak pozitív (negatív) szemidefinit.
 
+\newpage
+
 \section{Feltételes szélsőérték}
 
-Innen kezdődik az új anyag, a vizsgatétel tényleges tartalma.
-
-\subsection{Felvezető feladat}\label{sec:t2-bev}
+\subsection{Felvezető feladat}\label{sec:impl-example}
 
 A következő feladat a feltételes szélsőérték és (utólagosan) az implicitfüggvények felvezetésére szolgál.
 
@@ -104,7 +104,7 @@ $\exists K(a) : K(a) \subset A$.
 
 $\R^2$ esetén ez azt fogja jelenteni, hogy valamilyen távolságig mindkét változó szerinti, egymástól függetlenül tett kimozdulásnak benne kéne lennie a halmazban. Ez viszont $\mathcal D_{f|_{\{g=0\}}}$-nél nem fog működni, mivel a $g=0$ feltételünk meghatároz egy összefüggést $x$ és $y$ között.
 
-A következő ábrákon jól láthatóak a különböző itt vizsgált függvények :
+A következő ábrán jól láthatóak a különböző itt vizsgált függvények :
 
 \begin{center}
 \begin{tikzpicture}
@@ -195,6 +195,8 @@ A következő ábrákon jól láthatóak a különböző itt vizsgált függvén
 \end{tikzpicture}
 \end{center}
 
+\newpage
+
 Látjuk, hogy $\displaystyle\mathcal D_{f|_{\{g=0\}}} = \{g=0\}$ halmaz egy egyenes pontjait írja le, így természetesen egyik pontja se lehet belső pont, azaz tényleg nem alkalmazhatóak az eddigi tételeink. Ettől függetlenül persze az $f|_{\{g=0\}}$ leszűkítésnek lehetnek szélsőértékei, ahogy azt az utolsó ábra is mutatja.
 
 \textbf{Ötlet:} Vegyük a $h(x) := \frac 12 - x \quad (x \in \R)$ függvényt, ami a $\{g=0\}$ halmaz által leírt egyenes explicit alakja, vagyis $\graf h = \{g = 0\}$.
@@ -232,15 +234,15 @@ Tehát az egységkerületű téglalapok közül az $x=y=\frac14$ oldalhosszú n�
 
 A fenti feladat ezzel az intuícióval több változóra is kiáltalánosítható, a feltételes szélsőérték (és az implicitfüggvény) fogalmának bevezetésével.
 
-\subsection{Általános definíció}
+\subsection{Definíció}
 
-\begin{definition}[feltételes lokális szélsőérték]
-Legyen $1 \le n, m \in \N,\ \emptyset \ne U \subset \R^n$ és $f : U \to \R$, valamint $g = (g_1,\,\ldots,\, g_m) : U \to \R^m$.
+Legyen $1 \le n, m \in \N,\ \emptyset \ne U \subset \R^n$ és $f : U \to \R, g = (g_1,\,\ldots,\, g_m) : U \to \R^m$.
 
 Ekkor $f$ függvénynek a \textbf{$g = 0$ feltételre vonatkozóan feltételes lokális maximuma (minimuma) van a $c \in \{g = 0\} := \{\xi \in U : g(\xi) = 0\}$ pontban}, ha az $\tilde f(\xi) := f(\xi)\quad (\xi \in \{g=0\})$ függvénynek $c$-ben lokális maximuma (minimuma) van.
 
 Továbbá elnevezzük $f(c)$-t \textbf{feltételes lokális maximum (minimum)} vagy \textbf{szélsőérték}nek, és $c$-t pedig \textbf{feltételes lokális maximumhely (minimumhely)} vagy \textbf{szélsőértékhely}nek.
-\end{definition}
+
+\subsubsection{Megjegyzések}
 
 Feltesszük továbbá, hogy $\{g=0\} \ne \emptyset$,
 
@@ -252,7 +254,9 @@ Tehát, ha $f$-nek egy $c \in \{g=0\}$ pontban lokális szélsőértéke van a $
 
 \section{Feltételek}
 
-\begin{theorem}[elsőrendű szükséges feltétel]
+\subsection{Elsőrendű szükséges feltétel}
+
+\subsubsection{Tétel}
 
 Legyen $1 \le n,m \in \N,\ m < n,\ \emptyset \ne U \subset \R^n$ nyílt és $f : U \to \R,\ g = (g_1,\,\ldots,\,g_m) : U \to \R^m$.
 
@@ -268,15 +272,15 @@ Továbbá tegyük fel, hogy
 \end{enumerate}
 
 Ekkor $\exists \lambda \in \R^m : \grad (f + \lambda g)(c) = 0$, ahol $\displaystyle(\lambda g)(\xi) := \dprod {\lambda,g(\xi)} = \sum_{i=1}^m \lambda_ig_i(\xi) \quad (\xi \in U)$.
-\end{theorem}
 
-A tétel bizonyítására a fejezet végén kerül sor.
+Vegyük észre, hogy a tétel nagyon hasonló a feltétel nélküli esethez, csak itt a vizsgált $f$ függvény helyett az $f_\lambda := f + \lambda g$ függvényre vonatkozik. A $\lambda_i$-ket \textbf{Lagrange-multiplikátor} nevezzük, $f_\lambda$-t pedig \textbf{Lagrange-függvénynek}.  Hasonlóan fog felépülni a következő két tétel is.
 
-Vegyük észre, hogy a tétel nagyon hasonló a feltétel nélküli esethez, csak itt a vizsgált $f$ függvény helyett az $f_\lambda := f + \lambda g$ függvényre vonatkozik. A $\lambda_i$-ket \textbf{Lagrange-multiplikátoroknak} nevezzük, $f_\lambda$-t pedig \textbf{Lagrange-függvénynek}.  Hasonlóan fog felépülni a következő két tétel is.
+\subsection{Másodrendű elégséges feltétel}
 
-A következő tétel kimondása előtt be kell vezetnünk a feltételes definitség fogalmát.
+\subsubsection{Feltételes definitség}
 
-\begin{definition}[feltételes definitség]
+A tétel kimondása előtt be kell vezetnünk a feltételes definitség fogalmát.
+
 Legyen $Q : \R^n \to \R$ egy kvadratikus alak és $B \in \R^{m\times n}$. Vegyük az $\mathcal A_B := \{x \in \R^n : B\cdot x = 0\}$ halmazt.
 Továbbá tfh. $m < n$ és $\rang B = m$.
 
@@ -287,9 +291,11 @@ Ekkor a $Q$ kvadratikus alak $B$-re nézve:
     \item \textbf{feltételesen pozitív szemidefinit}, ha $Q(x) \ge 0 \quad (x \in \mathcal A_B)$
     \item \textbf{feltételesen negatív szemidefinit}, ha $Q(x) \le 0 \quad (x \in \mathcal A_B)$
 \end{enumerate}
-\end{definition}
 
-\begin{theorem}[másodrendű szükséges feltétel]
+\subsubsection{Tétel}
+
+\begin{samepage}
+
 Legyen $1 \le n,m \in \N,\, m < n,\, \emptyset \ne U \subset \R^n$ nyílt és $f : U \to \R,\ g : U \to \R^n$. 
     
 Továbbá tegyük fel, hogy
@@ -304,9 +310,13 @@ Továbbá tegyük fel, hogy
 \end{enumerate}
 
 Ekkor $f$-nek $c$-ben a $g=0$ feltételre vonatkozóan feltételes lokális minimuma (maximuma) van.
-\end{theorem}
 
-\begin{theorem}[másodrendű elégséges feltétel]
+\end{samepage}
+
+\subsection{Másodrendű szükséges feltétel}
+
+\subsubsection{Tétel}
+
 Legyen $1 \le n,m \in \N,\, m < n,\, \emptyset \ne U \subset \R^n$ nyílt, $f : U \to \R,\, g: U \to \R^m$ és $c \in \{g=0\}$.
 
 Továbbá tegyük fel, hogy
@@ -322,10 +332,8 @@ Ekkor $\exists \lambda \in \R^m$, amivel $f_\lambda := f + \lambda g$-re teljes�
     \item $\grad f_\lambda(c) = 0$
     \item $Q_c^{f_\lambda}$ kvadratikus alak $g'(c)$ mátrixra nézve feltételesen pozitív (negatív) szemidefinit
 \end{enumerate}
-\end{theorem}
 
-\newpage
-
+\needspace{7\baselineskip}
 \subsection{Megjegyzések}
 
 \subsubsection{$m = n$ eset}
@@ -363,23 +371,86 @@ $$\partial_j f(c_1,\ldots,c_n) + \sum_{k=1}^m\lambda_k \partial_j g_k(c_1,\ldots
 
 Ez összesen $n$ darab egyenletet fog adni. A maradék $m$ egyenletet a $g(c)=0$ feltételből kapjuk, ugyanis $g_l(c_1, \ldots,c_n) = 0 \quad (l = 1,\ldots,m)$.
 
+\subsubsection{$\R^2$-beli feltételes definitség $g'(c)$-re nézve}\label{note:cond-orto}
+
+Nézzük a $B := g'(c) \in \R^{m \times n}$, $m$-rangú mátrixszal vett $\mathcal A_B := \{y \in \R^n : B \cdot y = 0\}$ halmazt $m=1,\ n=2$ esetben:
+
+Ekkor $0 \ne B = \grad g(c) \in \R^2$ és $\mathcal A_B = \{y \in \R^2 : \dprod{\grad g(c),\,y} = 0\}$.
+
+Skaláris szorzat tulajdonságai alapján ekkor tudjuk, hogy $x \in \mathcal A_B$ azzal ekvivalens, hogy $x$ merőleges a gradiensre. Vagyis az $\mathcal A_B$ halmaz az origón átmenő, $\grad g(c)$ vektorra merőleges egyenes.
+
+Hasonlóan $m=1,\, n > 2$ esetben pedig $\grad g(c)$ és $x$ ortogonálisak kell, hogy legyenek.
+
+\subsubsection{Példafeladat}
+
+Legyen $n := 2,\, m:=1,\,f(x,y) := 2x + 3y$ és $g(x,y) := x^2+y^2-1 \enspace \big((x,y) \in \R^2\big)$.
+
+Ezek alapján definiáljuk $f_\lambda$-t: $f_\lambda(x,y) := 2x + 3y + \lambda(x^2+y^2-1) \enspace \big((x,y) \in \R^2\big)$.
+
+Ekkor az elsőrendű szükséges feltétel szerint a következő egyenletrendszer megoldásaiban lehet csak feltételes lokális szélsőértéke a függvénynek $g = 0$ feltételre nézve:
+\begin{alignat*}{2}
+    \partial_1 f_\lambda(x,y) &= 2 + 2\lambda x &&= 0 \\
+    \partial_2 f_\lambda(x,y) &= 3 + 2\lambda y &&= 0 \\
+    g(x,y)                    &= x^2 + y^2 - 1  &&= 0
+\end{alignat*}
+
+Számoljuk ki az egyenletrendszer megoldásait:
+\begin{gather*}
+    x_1 := \frac 2 {\sqrt{13}},\ y_1 := \frac 3 {\sqrt{13}},\ \lambda_1 := -\frac {\sqrt{13}} 2,
+    \\
+    x_2 := -\frac 2 {\sqrt{13}},\ y_2 :=  -\frac 3 {\sqrt{13}},\ \lambda_2 := \frac {\sqrt{13}} 2
+\end{gather*}
+
+Ezekre teljesül, hogy $g'(x_i, y_i) = \grad g(x_i, y_i) = (2x_i, 2y_i) = 2(x_i, y_i) \quad (i = 1,2)$.
+
+Valamint a $c^{(i)} := (x_i, y_i) \in \R^2 \enspace (i = 1,2)$ jelölés bevezetésével:
+$$Q_{c^{(i)}}^{f_\lambda}(x,y) =
+\dprod{
+    \begin{bmatrix}
+        2\lambda_i & 0 \\
+        0 & 2\lambda_i
+    \end{bmatrix}
+    \cdot
+    \xymat
+,\, \xymat}
+=
+\dprod{
+    \begin{bmatrix}
+        2\lambda_ix \\
+        2\lambda_iy
+    \end{bmatrix},
+    \xymat
+}
+=
+2 \lambda_i(x^2 + y^2)$$
+
+\begin{gather*}
+Q_{c^{(1)}}^{f_\lambda}(x,y) = -\sqrt{13}(x^2+y^2) < 0
+\enspace \text{és} \enspace
+Q_{c^{(2)}}^{f_\lambda}(x,y) = \sqrt{13}(x^2+y^2) > 0
+\\[4pt]
+\big((x,y) \in \R^2 \setminus \{(0,0)\}\big)
+\end{gather*}
+
+Tehát $Q_{c^{(1)}}^{f_\lambda}$ negatív definit, $Q_{c^{(2)}}^{f_\lambda}$ pozitív definit, vagyis a másodrendű elégséges feltétel szerint $f$-nek $c^{(1)}$-ben feltételes lokális maximuma, $c^{(2)}$-ben feltételes lokális minimuma van.
+
 \section{Elsőrendű szükséges feltétel bizonyítása}
 
-\begin{theorem*}[elsőrendű szükséges feltétel]
-\mbox{}
+\subsection{Tétel}
 
 Legyen $1 \le n,m \in \N,\ m < n,\ \emptyset \ne U \subset \R^n$ nyílt és $f : U \to \R,\ g = (g_1,\,\ldots,\,g_m) : U \to \R^m$.
 
 Továbbá tegyük fel, hogy
-\begin{enumerate}[label=(\alph*)]
+\begin{enumerate}[label=(\alph*),itemsep=1pt,topsep=1pt]
     \item $f \in D$
     \item $g \in C^1$
     \item $f$-nek $c\in\{g=0\}$ helyen feltételes lokális szélsőértéke van $g=0$ feltételre nézve
     \item $\rang g'(c) = m$
 \end{enumerate}
 Ekkor $\exists \lambda \in \R^m : \grad (f + \lambda g)(c) = 0$, ahol $\displaystyle(\lambda g)(\xi) := \dprod {\lambda,g(\xi)} = \sum_{i=1}^m \lambda_ig_i(\xi) \quad (\xi \in U)$.
-\end{theorem*}
-\begin{proof}
+\vspace{-18pt}
+\subsection{Bizonyítás}
+
 Egy gyors lebontása a ``szereplőinknek'', támpontnak a bizonyítás során:
 \begin{itemize}[itemsep=1pt,topsep=1pt]
     \item $m < n$
@@ -391,11 +462,15 @@ Egy gyors lebontása a ``szereplőinknek'', támpontnak a bizonyítás során:
     \item $\rang g'(c) = m$
 \end{itemize}
 
+\subsubsection{Bizonyítás}
+
 A rangfeltételből tudjuk, hogy $g'(c) \in \R^{m\times n}$ mátrixnak létezik $A \in \R^{m \times m}$ részmátrixa, amire $\det A \ne 0$ (mivel az összes ($m$ darab) sora lineárisan független). 
 
 Jelöljük az $A$ mátrixot meghatározó oszlopok indexét $j_1, \ldots, j_m$-el, majd vegyük a következő indexhalmazt:
 $$\{i_1, \ldots, i_{n-m}\} := \{1, \ldots, n\} \setminus \{j_1, \ldots, j_m\}$$
 Ekkor $j_k \enspace (k = 1,\ldots,m)$ a lineárisan független oszlopokat indexeli, $i_k \enspace (k = 1,\ldots,n-m)$ pedig a maradékot.
+
+Ha nehézséget okoz a bizonyítás megértése, vagy inkább az intuíció az egész mögött, akkor egy rövid, megértést remélhetőleg segítő szekció megtalálható a függelékben (ld. \ref{sec:cond-expl}), azonban ott használva vannak az eddig bevezetett jelölések.
 
 \bigskip
 
@@ -453,7 +528,7 @@ Ezeket összevonva pedig:
 $$\partial_k f(c) + \sum_{l=1}^m \lambda_l \cdot \partial_kg_l(c) = 0 \quad (k = 1,\ldots,n)$$
 
 Tehát,
-\[
-\grad (f + \lambda g)(c) = \left( \partial_1f(c) + \sum_{l=1}^m \lambda_l \cdot \partial_1g_l(c), \ldots, \partial_n f(c) + \sum_{l=1}^m \lambda_l \cdot \partial_n g_l(c) \right) = 0 \qedhere
-\]
-\end{proof}
+\begin{equation*}
+\grad (f + \lambda g)(c) = \left( \partial_1f(c) + \sum_{l=1}^m \lambda_l \cdot \partial_1g_l(c), \ldots, \partial_n f(c) + \sum_{l=1}^m \lambda_l \cdot \partial_n g_l(c) \right) = 0
+\qed
+\end{equation*}

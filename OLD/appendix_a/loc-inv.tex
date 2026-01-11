@@ -1,0 +1,47 @@
+\section{Inverzfüggvény-tétel feltevéseinek igazolása}\label{demo:inv-trans}
+
+Legyen $1 \le n \in \N,\, f \in \R^n \to \R^n, a \in \intp \dom_f$ és $b := f(a)$.
+
+Az inverz-függvény tétel a következőket köti ki:
+\begin{enumerate}[label=(\alph*),itemsep=1pt, topsep=2pt]
+    \item $f \in C^1\{a\}$ \label{cond:loc-inv-c}
+    \item $\det f'(a) \ne 0$ \label{cond:loc-inv-det}
+\end{enumerate}
+
+\vspace{8pt}
+A bizonyítás során fel szeretnénk tenni, hogy $a = b = 0$ (azaz $f(0) = 0$) és $f'(0) = I \in \R^{n \times n}$.
+
+Először, hogy $a = 0$ teljesüljön, el kell tolnunk a függvényt úgy, hogy az origóban az eredetileg $a$-hoz rendelt értéket vegye fel, azaz $f(x)$ helyett $f(x + a)$-t kell vennünk.
+
+Második lépésként szeretnénk $b = 0$-t teljesíteni, azaz $f(a) = 0$-t. Ezt úgy tudjuk elérni, ha a függvényértékeket eltoljuk az $f(a)$-ban felvett értékkel, vagyis $f(x)$ helyett $f(x) - f(a)$-t használjuk.
+
+Ezt a kettőt egyesítve kapjuk az $F(x) := f(x+a) - f(a)$ függvényt.
+
+Értelmezési tartományt nézve: $\dom_F = \{\xi \in \R^n : \xi + a \in \dom_f\}$.
+
+Világos, hogy az új $a=b=0$ feltevésünket kielégíti $F$, mivel:
+$F(0) = f(0 + a) - f(a) = 0$.
+
+\ref{cond:loc-inv-c} feltétel megmarad (csak $F$-re $a = 0$-val nézve), mivel $f \in C^1\{a\} \implies F \in C^1\{0\}$ (folytonos függvényekből összetett függvények folytonossága és deriváltja tételek alapján).
+
+\ref{cond:loc-inv-det} feltételt is nézzük meg. $F'(x) = f'(x + a)$, mivel az $f(a)$ konstans tag kiesik, azon felül pedig csak egy eltolást teszünk, ez nincs kihatással a derivált alakjára.
+
+Kicsit formálisabban nyilatkozva, a totális derivált definíciója\footnote{Ez egy alternatív felírás, nem teljesen az az alak, amit Analízis III.-on vettünk. Aki szeretne ehelyett a lineáris közelítéses alakból kiindulni, nyugodtan megteheti, de mivel ez nem képezi közvetlen a tananyag részét, én kihagytam az eféle csemegézéseket.} alapján:
+\begin{gather*}
+F'(x) = \lim_{h\to0}\frac{\norm {F(x + h) - F(x) - L(h)}}{\norm h} = \lim_{h\to0} \frac {\norm{f(x+a+h)- f(a) - f(x+a) + f(a) -L(h)}}{\norm h} \\
+= \lim_{h\to 0}\frac{\norm{f(x+a+h) - f(x + a) - L(h)}}{\norm h} = f'(x + a)
+\end{gather*}
+
+Tehát valóban $F'(x) = f'(x+a)$, spec. $F'(0) = f'(a)$, tehát $\det f'(a) \ne 0 \implies \det F'(0) \ne 0$.
+
+Szükségünk van még $f'(a)\ \big(\!= f'(0)\big) =I\in \R^{n \times n}$-re is. Mivel $\det f'(a) \ne 0$, ezért $f'(a)$ mátrix invertálható, azaz $\exists \big(f'(a)\big)^{-1} : \big(f'(a)\big)^{-1} \cdot f'(a) = I \; \left(\in \R^{n \times n}\right)$.
+
+Ugyanígy $\det F'(0) \ne 0 \implies\exists \big(F(0)\big)^{-1} =: \Phi$ amire $\Phi \cdot F'(0) = I \; \left(\in \R^{n \times n}\right)$.
+
+Vegyük a $G(x) := \Phi \cdot F(x) \enspace (x \in \dom_F)$ függvényt.
+
+Ekkor a derivált linearitása miatt $G'(0) = \Phi \cdot F'(0) = I \in \R^{n \times n}$
+
+Fentiekhez hasonlóan könnyű utánaszámolni, hogy a mátrixszal való szorzás se fogja elrontani a korábbi feltételeket (az egyszerűség kedvéért az azelőtti alakot használtam demonstrációra).
+
+Így tehát a feltételeink szempontjából $G$ megfeleltethető $f$-nek az $a$ helyett a $0$ pontban vizsgálva, vagyis az eredeti bizonyításnál feltehetjük, hogy már eleve ilyen tulajdonságokkal dolgozunk.

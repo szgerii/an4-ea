@@ -1,0 +1,39 @@
+\chapter{*Egzisztencia és unicitás}
+
+\setcounter{footnote}{0}
+
+\section{Követelmények}
+\begin{enumerate}
+    \item Lipschitz-feltétel
+    \item Picard-Lindelöf-féle egzisztencia-tétel (fixpont-tétel alkalmazása)
+    \item Kezdetiérték-probléma megoldásának egyértelműsége
+    \item Unicitási tétel (bizonyítás nélkül)
+\end{enumerate}
+
+\section{Picard-Lindelöf-féle egzisztencia tétel}
+
+\subsection{Kezdetiérték-probléma (emlékeztető)}
+
+A tétel során használt jelölések gyors megkeresése érdekében itt újra megtalálható a \emph{d.e.}-k és \emph{k.é.p.}-ek definíciója:
+
+Legyen $1 \le n \in \N$ mellett $I \subset \R$ nyílt intervallum és $\emptyset \ne \Omega \subset \R^n$ szintén egy nyílt intervallum\footnote{Ínyenceknek tartomány.}. Vegyünk továbbá egy $f : I \times \Omega \to \R^n$ függvényt, amire $f \in C$.
+Adott továbbá $\tau \in I$ és $\xi \in \Omega$.
+
+Keresünk olyan $\varphi \in I \to \Omega$ függvényt, amire
+\begin{enumerate}[itemsep=1pt, topsep=1pt]
+    \item $\dom_\varphi$ nyílt intervallum
+    \item $\varphi \in D$ és $\varphi'(x) = f(x,\varphi(x))$
+    \item $\varphi(\tau) = \xi$
+\end{enumerate}
+
+\subsection{Lipschitz-feltétel}
+
+Egy $f$ függvény teljesíti a \textbf{Lipschitz-feltételt} (vagy \textbf{Lipschitz-folytonos}), ha
+$$\exists L \in \R, L\ge 0 : \forall x,y \in \dom_f : \norm{f(x) - f(y)} \le L \cdot \norm{x-y}$$
+
+Differenciálegyenletek kontextusában a következő formában\footnote{Ez az előadáson és a könyvben bevezetett alak.} definiáljuk:
+$$\forall Q \subset \R, Q \text{ kompakt} : \exists L \in \R, L \ge 0 : \norm{f(u,v) - f(u,z)} \le L \cdot \norm{v - z} \quad (u \in I,\ v,z \in Q)$$
+Ekkor az $f$ függvény (a differenciálegyenlet jobb oldala) teljesíti a \emph{Lipschitz-feltételt}. A fenti definíciókban az $L$ számot \textbf{Lipschitz-konstansnak} nevezzük.
+
+\subsection{Differenciálegyenletek integrálegyenletként}
+

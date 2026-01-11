@@ -1,0 +1,301 @@
+\chapter{Implicit- és inverzfüggvény}\label{chapter:tetel2}
+
+\section{Követelmények}
+\begin{enumerate}
+    \item Implicitfüggvény fogalma
+    \item Kapcsolata a feltételes szélsőérték problémával és inverzfüggvénnyel
+    \item Implicitfüggvény-tétel
+    \item Inverzfüggvény-tétel
+    \item Inverzfüggvény-tétel bizonyításának vázlata
+\end{enumerate}
+
+\section{Implicitfüggvény}
+
+\subsection{Felvezetés, definíció}
+
+Legyen $n,m \in \N,\, 2 \le n$ és $1 \le m < n$.
+
+Ha $\xi = (\xi_1, \ldots, \xi_n) \in \R^n$, akkor szedjük szét egy $m$ hosszú részre és a maradékra:
+
+$$x := (\xi_1, \ldots, \xi_{n-m})\in \R^{n-m}, \  y := (\xi_{n-m+1}, \ldots, \xi_n) \in \R^m$$
+
+Ezt $\xi = (x,y)$-al fogjuk jelölni, röviden: $\R^n \equiv \R^{n-m} \times \R^m$.
+
+Ezt alkalmazva egy $f = (f_1, \ldots, f_m) \in \R^n \to \R^m$ függvényt fel tudunk írni egy kétváltozós vektorfüggvényként, ha $f \in \R^{n-m} \times \R^m \to \R^m$-ként kezeljük.
+
+Tegyük fel, hogy $\exists (a,b) \in \dom_f : f(a,b) = 0$, azaz $(a,b)$ zérushelye $f$-nek.
+
+Továbbá tegyük fel, hogy $\exists K(a) \in \R^{n-m}, K(b) \in \R^m : \forall x \in K(a) : \exists! y \in K(b) : f(x,y)=0$.
+
+Definiáljuk ekkor $\varphi(x) := y$-al a $\varphi : K(a) \to K(b)$ függvényt, azaz $f(x,\varphi(x)) = 0 \quad (x \in K(a))$.
+
+Fontos, hogy $y$-t \emph{egyértelműen} tudjuk hozzárendelni $x$-hez a fenti feltevésben, azaz $y = \varphi(x)$ az egyetlen $y \in K(b)$, amire $f(x,y)=0$.
+
+Ezt a $\varphi$ függvényt az $f$ által (az $(a,b)$ körül) meghatározott \textbf{implicitfüggvénynek} nevezzük.
+
+\begin{samepage}
+A feltételekből nyilvánvaló, hogy $\varphi(a) = b$, általánosan pedig felírható a következő egyenletrendszer:
+$$
+\begin{aligned}
+f_1(x_1, \ldots, x_{n-m},& y_1, \ldots, y_m) =\ & 0 \\
+&\vdots & \vdots \\
+f_m(x_1, \ldots, x_{n-m},& y_1, \ldots, y_m) =\ & 0
+\end{aligned}
+$$
+\end{samepage}
+
+Ennek a rendszernek minden $x \in K(a)$ mellett egyértelműen létezik $y \in K(b)$ megoldása. Vagyis az $x_1, \ldots, x_{n-m}$ paraméterekből ki tudjuk fejezni az $y_1, \ldots, y_m$ változókat.
+
+Legyen $F(x,y) := (x,f(x,y)) \quad ((x,y) \in \dom_f)$, ekkor $F \in \R^n \to \R^n$ és spec. $F(a,b) = (a,0)$.
+
+\sloppy Ha egy $(x,y) \in \dom_f$ helyen $f \in D\{(x,y)\}$, akkor (összetett fv. deriváltja tétel alapján) $F~\in~D\{(x,y)\}$ és
+
+$$
+F'(x,y) = 
+\begin{bmatrix}
+    I & \Theta \\
+    \partial_1f(x,y) & \partial_2f(x,y)
+\end{bmatrix} \in \R^{n \times n}
+$$
+
+ahol $I$ az $\R^{(n-m)\times(n-m)}$-beli egységmátrix, $\Theta$ az $\R^{(n-m) \times m}$-beli nullmátrix.
+
+Talán kicsit könnyebben feldolgozható a mátrix felépítése és a dimenziók szerepe a következő, kibontott alakból:
+
+$$
+F'(x,y) = 
+\begin{bmatrix}
+    1 & 0 & \cdots & 0 & \, & 0 & 0 & \cdots & 0 \\
+    0 & 1 & \cdots & 0 & \, & 0 & 0 & \cdots & 0 \\
+      &   & \ddots &   & \, &  &   & \vdots &   \\
+    0 & 0 & \cdots & 1 & \, & 0 & 0 & \cdots & 0 \\
+    \\
+    \partial_{x_1}f_1 & \partial_{x_2}f_1 & \cdots & \partial_{x_{n-m}}f_1 & \, & \partial_{y_1}f_1 & \partial_{y_2}f_1 & \cdots & \partial_{y_m}f_1 \\
+    \partial_{x_1}f_2 & \partial_{x_2}f_2 & \cdots & \partial_{x_{n-m}}f_2 & \, & \partial_{y_1}f_2 & \partial_{y_2}f_2 & \cdots & \partial_{y_m}f_2 \\
+    && \ddots & &&&& \ddots\\
+    \partial_{x_1}f_m & \partial_{x_2}f_m & \cdots & \partial_{x_{n-m}}f_m & \, & \partial_{y_1}f_m & \partial_{y_2}f_m & \cdots & \partial_{y_m}f_m \\
+\end{bmatrix}
+$$
+
+% TODO: parciális deriváltmátrix
+
+Ha $f \in C^1\{(a,b)\}$, akkor $F \in C^1\{(a,b)\}$.
+
+Meggondolható (pl. mindig első sor szerint számolva), hogy $\det F'(a,b) = \det \partial_2 f(a,b)$, tehát $\det \partial_2 f(a,b) \ne 0 \implies \det F'(a,b) \ne 0$.
+
+\subsection{Implicitfüggvény-tétel}\label{sec:impl-fv}
+
+Legyen $n,m \in \N,\  2 \le n,\ 1 \le m < n$ és $f \in \R^{n-m} \times \R^m \to \R^m$.
+
+Tegyük fel, hogy $f \in C^1$ és egy $(a,b) \in \intp \dom_f$ helyen $f(a,b) = 0, \text{ ill. } \det \partial_2 f(a,b) \ne 0$, azaz $\partial_2f(a,b)$ nem szinguláris.
+\vspace{8pt}
+
+Ekkor alkalmas $K(a), K(b)$-vel létezik az $f$ által az $(a,b)$ körül meghatározott $\varphi : K(a) \to K(b)$ implicitfüggvény. Továbbá $\varphi \in C^1$ és $\varphi'(x) = -\partial_2f(x,\varphi(x))^{-1} \cdot \partial_1 f(x,\varphi(x)) \enspace (x \in K(a))$.
+
+\section{Lokális invertálhatóság}
+
+\subsection{Egyváltozós eset}
+
+Emlékeztetőnek nézzük meg az egyváltozós valós függvényeket.
+
+Legyen $f \in \R \to \R,\ f \in C^1\{a\}$ és $f'(a) \ne 0$.
+\vspace{8pt}
+
+Ekkor $\exists r > 0$, amivel $I := (a-r,\ a+r) \subset \dom_f$ bevezetésével:
+\begin{enumerate}[label=(\alph*), itemsep=1pt, topsep=4pt]
+    \item $\exists (\restrict f I)^{-1} =: g$ inverzfüggvény
+    \item $g \in D$
+    \item $g'(x) = \dfrac 1 {f'(g(x))} \quad (x \in \dom_g)$
+\end{enumerate}
+
+Ezt szeretnénk általánosítani többváltozós vektorfüggvények esetére.
+
+\needspace{7\baselineskip}
+\subsection{Lokális inverz}
+
+Legyen $1 \le n \in \N,\ f \in \R^n \to \R^n$ és $a \in \intp \dom_f$.
+
+Az $f$ függvény \textbf{lokálisan invertálható} az $a$-ban, ha $\exists K(a) \subset \dom_f$, amire a $g := \restrict f {K(a)}$ leszűkítés invertálható.
+
+Ebben az esetben a $g^{-1}$ inverzfüggvényt az $f$ fv. $a$-beli \textbf{lokális inverzének} nevezzük.
+
+\begin{comment}
+
+\subsection{Úton az inverzfüggvény-tétel felé}
+
+A következő tétel ad egy elégséges feltételt a lokális inverz létezésére és folytonosságára.
+
+\subsubsection{Tétel}
+
+Legyen $f \in \R^n \to \R^n,\, a \in \intp \dom_f$, és tfh. $f \in C^1\{a\}$, valamint az $f'(a)$ Jacobi-mátrix invertálható.
+
+Ekkor $\exists K(a) : \restrict f {K(a)} \text{ injektív}$ és $\phi := \left(\restrict f {K(a)}\right)^{-1}$-ra $\phi \in C^1$ és $\phi'(x) = \big(f'(\phi(x))\big)^{-1} \ (\forall x \in \dom_\phi)$.
+
+Az invertálhatóságot úgy is megfogalmazhatjuk, hogy $f'(a) \in \R^{n \times n}$ mátrixra $\det f'(a) \ne 0$.
+
+\subsubsection{Bizonyítás vázlata}\label{proof:loc-inv}
+
+Feltehető, hogy $a = f(a) = 0 \in \R^n,\, f'(0) = (v_{ik})^n_{i,k=1}\in\R^{n \times n}$.
+
+\end{comment}
+
+\subsection{Inverzfüggvény-tétel}
+
+\subsubsection{Tétel}
+
+Legyen $1 \le n \in \N,\, f \in \R^n \to \R^n,\, a \in \intp \dom_f$, továbbá tfh.
+\begin{enumerate}[label=(\alph*),itemsep=1pt,topsep=2pt]
+    \item $f \in C^1\{a\}$
+    \item $\det f'(a) \ne 0$, azaz $f'(a)$ Jacobi-mátrix invertálható ($\Leftrightarrow$ nem szinguláris)
+\end{enumerate}
+
+\vspace{6pt}
+Ekkor $\exists K(a)$ amin $\restrict f {K(a)}$ invertálható és a $\varphi := \left(\restrict f {K(a)}\right)^{-1}$ lokális inverzfüggvényre $\varphi \in C^1$ és $\varphi'(x) = \big(f'(\varphi(x))\big)^{-1}$ teljesülnek.
+
+\subsubsection{Bizonyítás vázlata}
+
+\begin{comment}
+A lokális inverzfüggvény-tétel bizonyítása a lokális inverz létezésének és folytonosságának belátásával kezdődik (ld. \ref{proof:loc-inv} tétel).
+\end{comment}
+
+A bizonyításból csak a lokális inverz létezését és folytonosságát fogjuk belátni. A teljes bizonyítás is ugyanezzel kezdődik.
+
+Definiáljuk először a \emph{zárt környezeteket:} $\overline{K_r(\alpha)} := \{z \in \R^n : \norm {z - \alpha}_\infty \le r\} \enspace (r > 0, \alpha \in \R^n)$.
+
+Megjegyezzük, hogy így spec. $z \in \overline{K_r(0)} \eqv \norm z_\infty \le r$.
+Jelölje $b := f(a)$.
+
+Ekkor $a = b = 0$ és $f'(0) = I \in \R^{n \times n}$ feltehető, mivel a $G(x) := (f'(a))^{-1}\cdot (f(x+a) - f(a))$ függvény ugyanúgy viselkedik $0$-ban vizsgálva, mint $f$ az $a$-ban (levezetéshez ld. \ref{demo:inv-trans}).
+
+\emph{Ötlet:} Fejezzük ki $x$-et az $f(x) = y$ egyenlőségből:
+\begin{equation}\label{eq:loc-inv-starter}
+f(x) = y \eqv y - f(x) = 0 \eqv y + \underbrace{x - f(x)}_{=:\,h(x)} = x \eqv y + h(x) = x
+\end{equation}
+
+Itt $h \in C^1$, mivel $f \in C^1$.
+
+Rögzítsünk egy $y \in \R^n$ vektort, válasszuk $r > 0$-t úgy, hogy $\overline{K_r(0)} \subset \dom_f$, és definiáljuk továbbá a $F_y(x) := y + h (x) \quad (x \in \overline{K_r(0)})$ függvényt.\footnote{
+Vegyük észre, hogy a \eqref{eq:loc-inv-starter} ekvivalencia alapján egy tetszőleges $y \in \R^n$ vektorra pontosan akkor fog teljesülni $f(x) = y$, ha $F_y(x) = x$. Innen jön az ötlet, hogy induljunk el az $F_y(x)$-en vett fixpont-tétel felé, ami majd megadja ezt az $x$-et.
+}
+
+Ekkor a feltevésekből következően
+$$h'(0) = \text{id}'(0) - f'(0) = I - I = (0)_{i,j=1}^n =: \Theta \in \R^{n \times n},$$
+azaz az $n \times n$-es nullmátrix.
+
+Feltehető továbbá, hogy $\forall x \in \overline{K_r(0)} : \norm {h'(x)}_\infty \le \dfrac 12$.
+
+Ezt megtehetjük, mivel $h \in C^1$ és $h'(0) = \Theta$ garantálják, hogy lesz $0$-nak környezete, ahol ``elég kicsit'' mozdultak csak el ehhez a parciális deriváltak. A korábbi $\overline{K_r(0)} \subset \dom_f$ kikötésünk pedig ezzel összeegyeztethető, mivel $0 \in \intp \dom_f$.
+
+Ebből következően\footnote{
+A $(*)$-al jelölt lépéséhez a Lagrange-féle középérték-egyenlőtlenséget alkalmazzuk. \\
+\href{https://en.wikipedia.org/wiki/Mean_value_theorem\#Mean_value_inequality}{Wikipédia: Mean Value Theorem}
+}
+\begin{gather}
+\forall x,z \in \overline{K_r(0)} : \norm {F_y(x)-F_y(z)}_\infty = \norm {y - h(x) - y + h(z)}_\infty = \notag \\
+= \norm {h(x)-h(z)}_\infty \stackrel{(*)}\le \sup\{\norm{h'(\xi)}_\infty : \xi \in \overline{K_r(0)}\} \cdot \norm{x - z}_\infty
+\le \dfrac 12 \cdot \norm{x-z}_\infty \label{eq:loc-inv-F-approx}
+\end{gather}
+
+Becsüljük $F_y(x)$ függvényérték $\infty$-norma szerint vett hosszát:
+\begin{gather*}
+\norm{F_y(x)}_\infty = \norm{y + h(x)}_\infty = \lVert{y + h(x) - \underbrace{h(0)}_{=\,0}}\rVert_\infty \le \norm y_\infty + \norm{h(x)-h(0)}_\infty \\
+\implies \text{ld. }\eqref{eq:loc-inv-F-approx} \implies \norm{F_y(x)}_\infty \le \norm{y}_\infty + \frac 12\norm{x}_\infty \le \norm y_\infty + \frac r2
+\end{gather*}
+
+Tehát $y \in K_{r/2}(0)$ választással,
+\begin{equation}\label{eq:loc-inv-Fy-rng}
+\norm{F_y(x)}_\infty < r \quad \text{és így} \quad F_y : \overline{K_r(0)} \to K_r(0).
+\end{equation}
+
+Vegyük a $\varrho(x,y) := \norm{x -y}_\infty ( = \varrho_\infty(x,y))$ metrikát. Ekkor a $(\overline{K_r(0)},\varrho)$ metrikus tér teljes\footnote{
+Ld. \emph{Analízis III., $p$-normák teljessége zárt intervallumon}. Ehhez a megállapításhoz volt fontos, hogy a környezetünk zárt legyen, ugyanis $(K_r(0),\,\varrho_\infty)$ metrikus tér nem lenne teljes.}\,\footnote{
+Itt az, hogy a norma által indukált metrikával kapott metrikus térre kimondtuk hogy teljes, ekvivalens azzal, hogy a $(\overline{K_r(0)}, \norm{.}_\infty)$ normált tér egy \emph{Banach-tér}.}.
+
+A \eqref{eq:loc-inv-F-approx} egyenlőtlenségben kapott becsléssel azt is beláttuk, hogy $F_y$ egy kontrakció, $q = 0.5$ kontrakciós együtthatóval. Továbbá $K_r(0) \subset \overline{K_r(0)}$ és a \eqref{eq:loc-inv-Fy-rng}-ben tett megállapításunk alapján alkalmazhatjuk $F_y$-ra a \emph{fixpont-tételt}.
+
+Vagyis
+\begin{equation*}
+    \forall y \in K_{r/2}(0) : \exists! x_y \in \overline{K_r(0)} : F_y(x_y) = x_y
+\end{equation*}
+
+Ez alapján definiáljunk egy $\varphi : K_{r/2}(0) \to \overline{K_r(0)}$ leképezést, amire $\varphi(y) := x_y \enspace (y \in K_{r/2}(0))$.
+Erre minden $y \in K_{r/2}(0)$ mellett teljesül, hogy $F_y(\varphi(y)) = \varphi(y)$, tehát
+\begin{equation*}
+    F_y(\varphi(y)) = y + \varphi(y) - f(\varphi(y)) = y + h(\varphi(y)) = \varphi(y)
+\end{equation*}
+
+Továbbá a $h(x) = x - f(x)$ definíció alapján,
+\begin{equation*}
+    y + \varphi(y) - f(\varphi(y)) = \varphi(y) \implies f(\varphi(y)) = y
+\end{equation*}
+
+Felhasználva a \eqref{eq:loc-inv-Fy-rng} korlátunkat, megállapítjuk, hogy
+\begin{equation*}
+    \norm{\varphi(y)}_\infty = \norm{F_y(\varphi(y))}_\infty < r \quad \text{és így} \quad \varphi : K_{r/2}(0) \to K_r(0)
+\end{equation*}
+
+Belátható továbbá\footnote{
+    Ezt az előadás és a segédanyag se részletezte. Nem feltétlen bonyolult, kihozható például a középérték-egyenlőtlenségből és a bi-Lipschitz tulajdonságból. Viszont ez megint új sugarak, korlátok és tételek behozását igényelné, ezért itt se bonyolítom a bizonyítást vele. Egy kicsit bonyolultabb módszer megtalálható a könyvben is.\\
+    \href{https://en.wikipedia.org/wiki/Lipschitz_continuity\#Definitions}{Wikipédia: Bi-Lipschitz tulajdonság (a \emph{Definitions} szekció végén található)} % TODO: bevanal2-ből kiírni függelékbe
+}, hogy $\rng_\varphi$ nyílt, és valamilyen $S := K(0) \subset \rng_\varphi \subset \overline{K_r(0)}$ környezettel véve az $\restrict f S$ leszűkítés injektív. Tehát $f$ lokálisan invertálható a $0$ pontban és a lokális inverze a $\varphi$ függvény $\rng_{\restrict f S}$ halmazra vett leszűkítése lesz. \partqed
+
+{ % group introduced for \ty = \tilde y shortcut
+\newcommand{\ty}{\tilde y}
+
+Következő lépésnek vizsgáljuk $\varphi$ folytonosságát. Legyenek $y, \ty \in K_{r/2}(0)$, ekkor
+\begin{gather*}
+    \norm{\varphi(y) - \varphi(\ty)}_\infty = \norm{x_y - x_{\ty}}_\infty = \norm{F_y(x_y) - F_{\ty}(x_{\ty})}_\infty = \\
+    = \norm{y + h(\varphi(y)) - \ty - h(\varphi(\ty))}_\infty \le \norm{y - \ty}_\infty + \norm{h(\varphi(y)) - h(\varphi(\ty))}_\infty
+\end{gather*}
+
+Továbbá mivel $h$ egy kontrakció (ld. \eqref{eq:loc-inv-F-approx} korlát),
+\begin{gather*}
+    \norm{\varphi(y)-\varphi(\ty)}_\infty \le
+    \norm{y - \ty}_\infty + \norm{h(\varphi(y)) - h(\varphi(\ty))}_\infty \le \norm{y - \ty}_\infty + \frac 12 \norm{\varphi(y) - \varphi(\ty)}_\infty \\
+    \implies \norm{\varphi(y) - \varphi(\ty)}_\infty \le 2 \norm{y - \ty}_\infty 
+\end{gather*}
+
+Tehát teljesül $\varphi \in C\big(K_{r/2}(0)\big)$ is. A korábbi leszűkítést nézve mivel $\rng_{\restrict f S} \subset K_{r/2}(0)$, ezért spec. a $\left(\restrict f S \right)^{-1} = \restrict \varphi {\rng_{\restrict f S}}$ lokális inverz folytonos lesz az egész értelmezési tartományán. \partqed
+}
+
+\newpage
+
+Vizsgáljuk meg végül a lokális inverzet differenciálás szempontjából.
+
+Vezessük be a $g$ függvényt a következő módon:
+$$g \in \R^n \times \R^n \to \R^n : g(u,v) := f(v) - u \quad (u \in \R^n,\, v \in \dom_f)$$
+
+Ekkor $g \in C^1$ (mivel $f \in C^1$), $g(b,a) = f(a) - b = 0$. A deriváltjára pedig
+$$\grad g(u,v) = \begin{bmatrix}-I & f'(v)\end{bmatrix}$$
+
+Vagyis spec. $\partial_2 g(b,a) = f'(a) = f'(0) = I$ nem szinguláris. Mivel ezek a feltételek mind teljesülnek, alkalmazhatjuk az \emph{implicitfüggvény-tételt}.
+
+Tehát $\exists \psi : U \to V$ függvény, ami $g(u,v)$ által a $(0,0)$ körül meghatározott implicitfüggvény, azaz $\forall u \in U : g(u,\, \psi(u)) = 0$ (ahol $U, V$ alkalmas sugarú környezetei $0$-nak).
+
+Továbbá $\psi \in C^1$ és $\psi'(u) = -\partial_2g(u,\, \psi(u))^{-1} \cdot \partial_1 g(u,\, \psi(u)) \enspace (u \in U)$.
+
+Ebből nekünk az utolsó tulajdonság lesz hasznos, mivel
+\begin{equation*}
+    \psi'(x) = -\partial_2g(x,\, \psi(x))^{-1} \cdot \partial_1 g(x,\, \psi(x)) = -\big(f'(\psi(x))\big)^{-1} \cdot -I = \big(f'(\psi(x))\big)^{-1} \quad (x \in U)
+\end{equation*}
+
+Ha behelyettesítjük $\psi$-t a $g$ függvénybe, akkor $g(x,\,\psi(x)) = f(\psi(x)) - x = 0 \enspace (x \in U)$. Tehát minden $x \in U$ esetén $f(\psi(x)) = x$. Továbbá minden $x \in U$ értékhez a $\psi(x) =: y \in V$ az egyetlen olyan $y$, amivel $g(x,y) = 0$.
+
+A korábbiakból tudjuk, hogy $f$-nek létezik lokális inverze a $0$-ban, ez a $\varphi$ függvény. Tudjuk továbbá, hogy $\dom_\varphi$ nyílt, vagyis $U \subset \dom_\varphi$ feltehető.
+
+Mivel $f(\varphi(x)) = x$ is teljesül minden $x \in U$-re, ezért $\psi(x) = \varphi(x) \enspace (x \in U)$.
+
+Továbbá mivel tudjuk, hogy $\psi \in C^1$ és $U \subset \dom_{\varphi}$, ezért
+\begin{equation*}
+    \forall x \in U : \psi \in D\{x\} \implies \varphi \in D\{x\} \text{ és } \varphi'(x) = \psi'(x) = \big(f'(\varphi(x))\big)^{-1}
+\end{equation*}
+
+Tehát azt is beláttuk, hogy $\varphi \in C^1$ és $\varphi'(x) = \big(f'(\varphi(x))\big)^{-1}$. \qed
+
+\subsection{Inverz- és implicitfüggvény-tétel kapcsolata}
+
+Az \emph{ImpFT} (implicitfüggvény-tétel) és az \emph{InvFT} (inverzfüggvény-tétel)  bizonyítása nagyon szoros kapcsolatban áll egymással. Az egyik oldalt láttuk is, amikor az InvFT bizonyításának utolsó részéhez felhasználtuk az ImpFT-t. Ami ezekből viszont nem látszik, hogy a másik irányba is egy hasonlóan szoros kapcsolat található.
+
+Felmerülhet például a kérdés, hogy nem lett-e volna könnyebb az InvFT bizonyításban, ha már sokkal korábban behozzuk a $\psi$ implicitfüggvényt (amiről később belátjuk, hogy a lokális inverzzel megegyezik), és az első két állítást is ennek segítségével látjuk be. A rövid válasz az, hogy \emph{de, ugyanis az implicitfüggvény-tétel segítségével minden fenti tulajdonság (kb.) triviálisan megadható.} Valamint azt se lenne túl bonyolult belátni, hogy a kapott implicitfüggvény a lokális inverz kritériumainak megfelel (mi is megtettük a bizonyítás során).
+
+A probléma azzal van, hogy az ImpFT bizonyításához szükségünk van az InvFT egy gyengébb verziójára, mint lemma. Ez a lemma az, amit az első két részében beláttunk a bizonyításnak (szándékosan az ImpFT használata nélkül). Ez kimondja a lokális invertálhatóságot, a lokális inverz létezését, és annak folytonosságát (de \emph{nem} a folytonos differenciálhatóságot). Ez felhasználható utána az implicitfüggvény létezésének és folytonosságának belátásához az ImpFT bizonyítása során. Ezután a gyengített InvFT-től ``függetlenül'' belátható az implicitfüggvény folytonos differenciálhatósága és deriváltjának alakja is. Fogva a teljes ImpFT-t, utána visszajöhetünk a gyengített InvFT bizonyításunkhoz, és beláthatjuk $C^1$-et, valamint a derivált alakját (ahogy mi is tettük a fenti bizonyításban).

@@ -1,0 +1,15 @@
+\section{Szeparábilis differenciálegyenletek egzakttá alakítása}\label{sec:sep-exact-transform}
+
+Vegyünk egy szeparábilis d.e. feladatot:
+$$\varphi'(x) = g(x)\cdot h(\varphi(x)) \qquad (x \in \dom_\varphi)$$
+
+Ekkor átírható a következő alakba:
+$$\varphi'(x) = g(x) \cdot h(\varphi(x)) = -\frac{-g(x)}{1/h(\varphi(x))} \qquad (x \in \dom_\varphi)$$
+
+Illetve tetszőleges $\tau \in I,\ \xi \in J$ esetén,
+$$G(x,y) := -\int_\tau^x g(x)\,dx + \int_\xi^y\frac 1 {h(x)}\,dx \qquad (x \in I, y \in J)$$
+függvényre teljesül $G \in D$ és
+$$\grad G(x,y) = (-g(x),\ 1/h(y)) \qquad (x \in I, y \in J)$$
+
+Erre majd még visszatérek befejezni...
+% TODO
